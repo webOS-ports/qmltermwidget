@@ -1,0 +1,612 @@
+clang-analyzer|lib/BlockArray.cpp|unix.StdCLibraryFunctions|warning: The Nst argument to 'fdopen' is < N but should be >= N
+clang-analyzer|lib/BlockArray.cpp|unix.StdCLibraryFunctions|warning: The Nst argument to 'fdopen' is < N but should be >= N
+clang-analyzer|lib/Character.h|core.NullDereference|warning: Dereference of null pointer
+clang-analyzer|lib/Character.h|core.NullDereference|warning: Dereference of null pointer
+clang-analyzer|lib/kptydevice.h|alpha.cplusplus.IteratorRange|warning: Past-the-end iterator dereferenced
+clang-tidy|lib/BlockArray.cpp|bugprone-implicit-widening-of-multiplication-result|warning: performing an implicit widening conversion to type 'long' of a multiplication performed in type 'int'
+clang-tidy|lib/BlockArray.cpp|bugprone-implicit-widening-of-multiplication-result|warning: performing an implicit widening conversion to type 'long' of a multiplication performed in type 'int'
+clang-tidy|lib/BlockArray.cpp|bugprone-implicit-widening-of-multiplication-result|warning: performing an implicit widening conversion to type 'long' of a multiplication performed in type 'int'
+clang-tidy|lib/BlockArray.cpp|bugprone-implicit-widening-of-multiplication-result|warning: performing an implicit widening conversion to type 'long' of a multiplication performed in type 'int'
+clang-tidy|lib/BlockArray.cpp|cert-err33-c|warning: the value returned by this function should not be disregarded; neglecting it may lead to errors
+clang-tidy|lib/BlockArray.cpp|cert-err33-c|warning: the value returned by this function should not be disregarded; neglecting it may lead to errors
+clang-tidy|lib/BlockArray.cpp|cert-err33-c|warning: the value returned by this function should not be disregarded; neglecting it may lead to errors
+clang-tidy|lib/BlockArray.cpp|clang-analyzer-unix.StdCLibraryFunctions|warning: The Nst argument to 'fdopen' is < N but should be >= N
+clang-tidy|lib/BlockArray.cpp|clang-analyzer-unix.StdCLibraryFunctions|warning: The Nst argument to 'fdopen' is < N but should be >= N
+clang-tidy|lib/BlockArray.cpp|performance-no-int-to-ptr|warning: integer to pointer cast pessimizes optimization opportunities
+clang-tidy|lib/Character.h|clang-analyzer-core.NullDereference|warning: Dereference of null pointer
+clang-tidy|lib/Character.h|clang-analyzer-core.NullDereference|warning: Dereference of null pointer
+clang-tidy|lib/ColorScheme.cpp|bugprone-implicit-widening-of-multiplication-result|warning: performing an implicit widening conversion to type 'unsigned long' of a multiplication performed in type 'int'
+clang-tidy|lib/ColorScheme.cpp|bugprone-implicit-widening-of-multiplication-result|warning: performing an implicit widening conversion to type 'unsigned long' of a multiplication performed in type 'int'
+clang-tidy|lib/ColorScheme.cpp|performance-unnecessary-copy-initialization|warning: local copy 'dname' of the variable 'scheme_dir' is never modified; consider avoiding the copy
+clang-tidy|lib/ColorScheme.cpp|performance-unnecessary-copy-initialization|warning: the const qualified variable 'dir' is copy-constructed from a const reference; consider making it a const reference
+clang-tidy|lib/Filter.cpp|bugprone-implicit-widening-of-multiplication-result|warning: result of multiplication in type 'int' is used as a pointer offset after an implicit widening conversion to type 'ptrdiff_t'
+clang-tidy|lib/History.cpp|bugprone-implicit-widening-of-multiplication-result|warning: performing an implicit widening conversion to type 'qsizetype' (aka 'long long') of a multiplication performed in type 'int'
+clang-tidy|lib/History.cpp|bugprone-signed-char-misuse,cert-str34-c|warning: 'signed char' to 'quintN' (aka 'unsigned short') conversion; consider casting to 'unsigned char' first.
+clang-tidy|lib/History.cpp|cert-err33-c|warning: the value returned by this function should not be disregarded; neglecting it may lead to errors
+clang-tidy|lib/HistorySearch.cpp|performance-unnecessary-value-param|warning: parameter 'emulation' is passed by value and only copied once; consider moving it to avoid unnecessary copies
+clang-tidy|lib/KeyboardTranslator.cpp|cert-err33-c|warning: the value returned by this function should not be disregarded; neglecting it may lead to errors
+clang-tidy|lib/KeyboardTranslator.cpp|cert-err34-c|warning: 'sscanf' used to convert a string to an unsigned integer value, but function will not report conversion errors; consider using 'strtoul' instead
+clang-tidy|lib/Screen.cpp|bugprone-implicit-widening-of-multiplication-result|warning: result of multiplication in type 'int' is used as a pointer offset after an implicit widening conversion to type 'ptrdiff_t'
+clang-tidy|lib/Screen.cpp|bugprone-signed-char-misuse,cert-str34-c|warning: 'signed char' to 'unsigned int' conversion; consider casting to 'unsigned char' first.
+clang-tidy|lib/Screen.cpp|bugprone-switch-missing-default-case|warning: switching on non-enum value without default case may not cover all cases
+clang-tidy|lib/Screen.cpp|bugprone-switch-missing-default-case|warning: switching on non-enum value without default case may not cover all cases
+clang-tidy|lib/TerminalDisplay.cpp|bugprone-implicit-widening-of-multiplication-result|warning: performing an implicit widening conversion to type 'unsigned long' of a multiplication performed in type 'int'
+clang-tidy|lib/TerminalDisplay.cpp|bugprone-implicit-widening-of-multiplication-result|warning: result of multiplication in type 'int' is used as a pointer offset after an implicit widening conversion to type 'ptrdiff_t'
+clang-tidy|lib/TerminalDisplay.cpp|bugprone-implicit-widening-of-multiplication-result|warning: result of multiplication in type 'int' is used as a pointer offset after an implicit widening conversion to type 'ptrdiff_t'
+clang-tidy|lib/TerminalDisplay.cpp|bugprone-implicit-widening-of-multiplication-result|warning: result of multiplication in type 'int' is used as a pointer offset after an implicit widening conversion to type 'ptrdiff_t'
+clang-tidy|lib/TerminalDisplay.cpp|bugprone-implicit-widening-of-multiplication-result|warning: result of multiplication in type 'int' is used as a pointer offset after an implicit widening conversion to type 'ptrdiff_t'
+clang-tidy|lib/TerminalDisplay.cpp|bugprone-implicit-widening-of-multiplication-result|warning: result of multiplication in type 'int' is used as a pointer offset after an implicit widening conversion to type 'ptrdiff_t'
+clang-tidy|lib/TerminalDisplay.cpp|bugprone-implicit-widening-of-multiplication-result|warning: result of multiplication in type 'int' is used as a pointer offset after an implicit widening conversion to type 'ptrdiff_t'
+clang-tidy|lib/TerminalDisplay.cpp|bugprone-implicit-widening-of-multiplication-result|warning: result of multiplication in type 'int' is used as a pointer offset after an implicit widening conversion to type 'ptrdiff_t'
+clang-tidy|lib/TerminalDisplay.cpp|bugprone-implicit-widening-of-multiplication-result|warning: result of multiplication in type 'int' is used as a pointer offset after an implicit widening conversion to type 'ptrdiff_t'
+clang-tidy|lib/TerminalDisplay.cpp|bugprone-integer-division|warning: result of integer division used in a floating point context; possible loss of precision
+clang-tidy|lib/TerminalDisplay.cpp|bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp|warning: declaration uses identifier 'save__fixedFont', which is a reserved identifier
+clang-tidy|lib/TerminalDisplay.cpp|bugprone-signed-char-misuse,cert-str34-c|warning: 'signed char' to 'quintN' (aka 'unsigned int') conversion; consider casting to 'unsigned char' first.
+clang-tidy|lib/TerminalDisplay.cpp|bugprone-signed-char-misuse,cert-str34-c|warning: 'signed char' to 'quintN' (aka 'unsigned int') conversion; consider casting to 'unsigned char' first.
+clang-tidy|lib/TerminalDisplay.cpp|bugprone-signed-char-misuse,cert-str34-c|warning: 'signed char' to 'quintN' (aka 'unsigned int') conversion; consider casting to 'unsigned char' first.
+clang-tidy|lib/TerminalDisplay.cpp|bugprone-signed-char-misuse,cert-str34-c|warning: 'signed char' to 'quintN' (aka 'unsigned int') conversion; consider casting to 'unsigned char' first.
+clang-tidy|lib/TerminalDisplay.cpp|bugprone-switch-missing-default-case|warning: switching on non-enum value without default case may not cover all cases
+clang-tidy|lib/TerminalDisplay.cpp|bugprone-switch-missing-default-case|warning: switching on non-enum value without default case may not cover all cases
+clang-tidy|lib/TerminalDisplay.cpp|bugprone-switch-missing-default-case|warning: switching on non-enum value without default case may not cover all cases
+clang-tidy|lib/TerminalDisplay.cpp|bugprone-switch-missing-default-case|warning: switching on non-enum value without default case may not cover all cases
+clang-tidy|lib/TerminalDisplay.cpp|bugprone-unused-local-non-trivial-variable|warning: unused local variable 'unistr' of type 'std::wstring' (aka 'basic_string<wchar_t>')
+clang-tidy|lib/TerminalDisplay.cpp|clang-analyzer-optin.cplusplus.VirtualCall|warning: Call to virtual method 'TerminalDisplay::fontChange' during construction bypasses virtual dispatch
+clang-tidy|lib/TerminalDisplay.cpp|performance-unnecessary-copy-initialization|warning: the variable 'url' is copy-constructed from a const reference but is only used as const reference; consider making it a const reference
+clang-tidy|lib/Vt102Emulation.cpp|bugprone-branch-clone|warning: switch has N consecutive identical branches
+clang-tidy|lib/Vt102Emulation.cpp|bugprone-branch-clone|warning: switch has N consecutive identical branches
+clang-tidy|lib/Vt102Emulation.cpp|bugprone-branch-clone|warning: switch has N consecutive identical branches
+clang-tidy|lib/Vt102Emulation.cpp|bugprone-branch-clone|warning: switch has N consecutive identical branches
+clang-tidy|lib/Vt102Emulation.cpp|bugprone-branch-clone|warning: switch has N consecutive identical branches
+clang-tidy|lib/Vt102Emulation.cpp|bugprone-branch-clone|warning: switch has N consecutive identical branches
+clang-tidy|lib/Vt102Emulation.cpp|bugprone-branch-clone|warning: switch has N consecutive identical branches
+clang-tidy|lib/Vt102Emulation.cpp|bugprone-branch-clone|warning: switch has N consecutive identical branches
+clang-tidy|lib/Vt102Emulation.cpp|bugprone-branch-clone|warning: switch has N consecutive identical branches
+clang-tidy|lib/Vt102Emulation.cpp|bugprone-branch-clone|warning: switch has N consecutive identical branches
+clang-tidy|lib/Vt102Emulation.cpp|bugprone-branch-clone|warning: switch has N consecutive identical branches
+clang-tidy|lib/Vt102Emulation.cpp|bugprone-branch-clone|warning: switch has N consecutive identical branches
+clang-tidy|lib/Vt102Emulation.cpp|bugprone-branch-clone|warning: switch has N consecutive identical branches
+clang-tidy|lib/Vt102Emulation.cpp|bugprone-signed-char-misuse,cert-str34-c|warning: 'signed char' to 'int' conversion; consider casting to 'unsigned char' first.
+clang-tidy|lib/Vt102Emulation.cpp|bugprone-signed-char-misuse,cert-str34-c|warning: 'signed char' to 'int' conversion; consider casting to 'unsigned char' first.
+clang-tidy|lib/Vt102Emulation.cpp|bugprone-switch-missing-default-case|warning: switching on non-enum value without default case may not cover all cases
+clang-tidy|lib/Vt102Emulation.cpp|bugprone-switch-missing-default-case|warning: switching on non-enum value without default case may not cover all cases
+clang-tidy|lib/Vt102Emulation.cpp|bugprone-switch-missing-default-case|warning: switching on non-enum value without default case may not cover all cases
+clang-tidy|lib/Vt102Emulation.cpp|cert-err33-c|warning: the value returned by this function should not be disregarded; neglecting it may lead to errors
+clang-tidy|lib/Vt102Emulation.cpp|cert-err33-c|warning: the value returned by this function should not be disregarded; neglecting it may lead to errors
+clang-tidy|lib/Vt102Emulation.cpp|cert-err33-c|warning: the value returned by this function should not be disregarded; neglecting it may lead to errors
+clang-tidy|lib/Vt102Emulation.cpp|cert-err33-c|warning: the value returned by this function should not be disregarded; neglecting it may lead to errors
+clang-tidy|lib/Vt102Emulation.cpp|clang-analyzer-optin.cplusplus.VirtualCall|warning: Call to virtual method 'VtNEmulation::reset' during construction bypasses virtual dispatch
+clang-tidy|lib/Vt102Emulation.cpp|clang-analyzer-optin.cplusplus.VirtualCall|warning: Call to virtual method 'VtNEmulation::resetMode' during construction bypasses virtual dispatch
+clang-tidy|lib/Vt102Emulation.cpp|clang-analyzer-optin.cplusplus.VirtualCall|warning: Call to virtual method 'VtNEmulation::resetMode' during construction bypasses virtual dispatch
+clang-tidy|lib/Vt102Emulation.cpp|clang-analyzer-optin.cplusplus.VirtualCall|warning: Call to virtual method 'VtNEmulation::resetMode' during construction bypasses virtual dispatch
+clang-tidy|lib/Vt102Emulation.cpp|clang-analyzer-optin.cplusplus.VirtualCall|warning: Call to virtual method 'VtNEmulation::resetMode' during construction bypasses virtual dispatch
+clang-tidy|lib/Vt102Emulation.cpp|clang-analyzer-optin.cplusplus.VirtualCall|warning: Call to virtual method 'VtNEmulation::resetMode' during construction bypasses virtual dispatch
+clang-tidy|lib/Vt102Emulation.cpp|clang-analyzer-optin.cplusplus.VirtualCall|warning: Call to virtual method 'VtNEmulation::resetMode' during construction bypasses virtual dispatch
+clang-tidy|lib/Vt102Emulation.cpp|clang-analyzer-optin.cplusplus.VirtualCall|warning: Call to virtual method 'VtNEmulation::resetMode' during construction bypasses virtual dispatch
+clang-tidy|lib/Vt102Emulation.cpp|clang-analyzer-optin.cplusplus.VirtualCall|warning: Call to virtual method 'VtNEmulation::resetMode' during construction bypasses virtual dispatch
+clang-tidy|lib/Vt102Emulation.cpp|clang-analyzer-optin.cplusplus.VirtualCall|warning: Call to virtual method 'VtNEmulation::resetMode' during construction bypasses virtual dispatch
+clang-tidy|lib/Vt102Emulation.cpp|clang-analyzer-optin.cplusplus.VirtualCall|warning: Call to virtual method 'VtNEmulation::resetMode' during construction bypasses virtual dispatch
+clang-tidy|lib/Vt102Emulation.cpp|clang-analyzer-optin.cplusplus.VirtualCall|warning: Call to virtual method 'VtNEmulation::resetMode' during construction bypasses virtual dispatch
+clang-tidy|lib/Vt102Emulation.cpp|clang-analyzer-optin.cplusplus.VirtualCall|warning: Call to virtual method 'VtNEmulation::resetMode' during construction bypasses virtual dispatch
+clang-tidy|lib/Vt102Emulation.cpp|clang-analyzer-optin.cplusplus.VirtualCall|warning: Call to virtual method 'VtNEmulation::resetMode' during construction bypasses virtual dispatch
+clang-tidy|lib/Vt102Emulation.cpp|clang-analyzer-optin.cplusplus.VirtualCall|warning: Call to virtual method 'VtNEmulation::setMode' during construction bypasses virtual dispatch
+clang-tidy|lib/kpty.cpp|bugprone-assignment-in-if-condition|warning: an assignment within an 'if' condition is bug-prone
+clang-tidy|lib/kpty.cpp|bugprone-macro-parentheses|warning: macro argument should be enclosed in parentheses
+clang-tidy|lib/kpty.cpp|bugprone-macro-parentheses|warning: macro argument should be enclosed in parentheses
+clang-tidy|lib/kpty.cpp|bugprone-suspicious-string-compare|warning: function 'memcmp' is called without explicitly comparing result
+clang-tidy|lib/kpty.cpp|concurrency-mt-unsafe|warning: function is not thread safe
+clang-tidy|lib/kpty.cpp|concurrency-mt-unsafe|warning: function is not thread safe
+clang-tidy|lib/kpty.cpp|concurrency-mt-unsafe|warning: function is not thread safe
+clang-tidy|lib/kpty.cpp|concurrency-mt-unsafe|warning: function is not thread safe
+clang-tidy|lib/kpty.cpp|concurrency-mt-unsafe|warning: function is not thread safe
+clang-tidy|lib/kpty.cpp|concurrency-mt-unsafe|warning: function is not thread safe
+clang-tidy|lib/kpty.cpp|concurrency-mt-unsafe|warning: function is not thread safe
+clang-tidy|lib/kpty.cpp|concurrency-mt-unsafe|warning: function is not thread safe
+clang-tidy|lib/kpty.cpp|concurrency-mt-unsafe|warning: function is not thread safe
+clang-tidy|lib/kpty.cpp|concurrency-mt-unsafe|warning: function is not thread safe
+clang-tidy|lib/kpty.cpp|concurrency-mt-unsafe|warning: function is not thread safe
+clang-tidy|lib/kpty.cpp|concurrency-mt-unsafe|warning: function is not thread safe
+clang-tidy|lib/kptydevice.cpp|bugprone-implicit-widening-of-multiplication-result|warning: performing an implicit widening conversion to type '__suseconds_t' (aka 'long') of a multiplication performed in type 'int'
+clang-tidy|lib/kptydevice.cpp|bugprone-macro-parentheses|warning: macro argument should be enclosed in parentheses
+clang-tidy|lib/kptydevice.cpp|bugprone-macro-parentheses|warning: macro argument should be enclosed in parentheses
+clang-tidy|lib/kptydevice.cpp|clang-analyzer-optin.cplusplus.VirtualCall|warning: Call to virtual method 'KPtyDevice::close' during destruction bypasses virtual dispatch
+clang-tidy|lib/ksession.cpp|performance-unnecessary-value-param|warning: the parameter 'name' is copied for each invocation but only used as a const reference; consider making it a const reference
+clang-tidy|lib/ksession.cpp|performance-unnecessary-value-param|warning: the parameter 'name' is copied for each invocation but only used as a const reference; consider making it a const reference
+clang-tidy|lib/ksession.cpp|performance-unnecessary-value-param|warning: the parameter 'text' is copied for each invocation but only used as a const reference; consider making it a const reference
+cppcheck|lib/BlockArray.cpp|cstyleCast|style: C-style pointer casting
+cppcheck|lib/BlockArray.cpp|dangerousTypeCast|warning: Potentially invalid type conversion in old-style C cast, clarify/fix with C++ cast
+cppcheck|lib/BlockArray.cpp|funcArgNamesDifferent|style: Function 'at' argument N names different: declaration 'index' definition 'i'.
+cppcheck|lib/BlockArray.cpp|funcArgNamesDifferent|style: Function 'has' argument N names different: declaration 'index' definition 'i'.
+cppcheck|lib/BlockArray.cpp|uninitdata|error: Memory is allocated but not initialized: bufferN
+cppcheck|lib/BlockArray.cpp|uninitdata|error: Memory is allocated but not initialized: bufferN
+cppcheck|lib/BlockArray.cpp|uninitdata|error: Memory is allocated but not initialized: bufferN
+cppcheck|lib/BlockArray.cpp|unreadVariable|style: Variable 'newpos' is assigned a value that is never used.
+cppcheck|lib/BlockArray.cpp|variableScope|style: The scope of the variable 'newpos' can be reduced.
+cppcheck|lib/BlockArray.cpp|variableScope|style: The scope of the variable 'oldpos' can be reduced.
+cppcheck|lib/BlockArray.cpp|variableScope|style: The scope of the variable 'res' can be reduced.
+cppcheck|lib/Character.h|funcArgNamesDifferent|style: Function 'isTransparent' argument N names different: declaration 'palette' definition 'base'.
+cppcheck|lib/Character.h|noExplicitConstructor|style: Class 'Character' has a constructor with N argument that is not explicit.
+cppcheck|lib/CharacterColor.h|funcArgNamesDifferent|style: Function 'color' argument N names different: declaration 'palette' definition 'base'.
+cppcheck|lib/ColorScheme.cpp|funcArgNamesDifferent|style: Function 'loadColorScheme' argument N names different: declaration 'path' definition 'filePath'.
+cppcheck|lib/ColorScheme.cpp|funcArgNamesDifferent|style: Function 'read' argument N names different: declaration 'filename' definition 'fileName'.
+cppcheck|lib/ColorScheme.cpp|functionStatic|style: The member function 'Konsole::ColorSchemeManager::addCustomColorSchemeDir' can be static.
+cppcheck|lib/ColorScheme.cpp|functionStatic|style: The member function 'Konsole::ColorSchemeManager::defaultColorScheme' can be static.
+cppcheck|lib/ColorScheme.cpp|functionStatic|style: The member function 'Konsole::ColorSchemeManager::findColorSchemePath' can be static.
+cppcheck|lib/ColorScheme.cpp|functionStatic|style: The member function 'Konsole::ColorSchemeManager::listColorSchemes' can be static.
+cppcheck|lib/ColorScheme.h|returnByReference|performance: Function 'description()' should return member '_description' by const reference.
+cppcheck|lib/ColorScheme.h|returnByReference|performance: Function 'name()' should return member '_name' by const reference.
+cppcheck|lib/Emulation.cpp|constParameterPointer|style: Parameter 'unicodePoints' can be declared as pointer to const
+cppcheck|lib/Emulation.cpp|constParameterPointer|style: Parameter 'unicodePoints' can be declared as pointer to const
+cppcheck|lib/Emulation.cpp|constVariablePointer|style: Variable 'entry' can be declared as pointer to const
+cppcheck|lib/Emulation.cpp|constVariablePointer|style: Variable 'old' can be declared as pointer to const
+cppcheck|lib/Emulation.cpp|constVariable|style: Variable 'screenSize' can be declared as const array
+cppcheck|lib/Emulation.cpp|funcArgNamesDifferent|style: Function 'receiveChar' argument N names different: declaration 'ch' definition 'c'.
+cppcheck|lib/Emulation.cpp|funcArgNamesDifferent|style: Function 'receiveData' argument N names different: declaration 'buffer' definition 'text'.
+cppcheck|lib/Emulation.cpp|funcArgNamesDifferent|style: Function 'receiveData' argument N names different: declaration 'len' definition 'length'.
+cppcheck|lib/Emulation.cpp|funcArgNamesDifferent|style: Function 'setScreen' argument N names different: declaration 'index' definition 'n'.
+cppcheck|lib/Emulation.cpp|funcArgNamesDifferent|style: Function 'writeToStream' argument N names different: declaration 'decoder' definition '_decoder'.
+cppcheck|lib/Emulation.cpp|funcArgNamesDifferent|style: Function 'writeToStream' argument N names different: declaration 'decoder' definition '_decoder'.
+cppcheck|lib/Emulation.cpp|functionStatic|style: The member function 'Konsole::ExtendedCharTable::extendedCharHash' can be static.
+cppcheck|lib/Filter.cpp|constVariablePointer|style: Variable 'filter' can be declared as pointer to const
+cppcheck|lib/Filter.cpp|constVariablePointer|style: Variable 'filter' can be declared as pointer to const
+cppcheck|lib/Filter.cpp|funcArgNamesDifferent|style: Function 'activate' argument N names different: declaration 'action' definition 'actionName'.
+cppcheck|lib/Filter.cpp|funcArgNamesDifferent|style: Function 'setRegExp' argument N names different: declaration 'text' definition 'regExp'.
+cppcheck|lib/Filter.cpp|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::Filter::buffer' can be const.
+cppcheck|lib/Filter.cpp|shadowVariable|style: Local variable 'text' shadows outer variable
+cppcheck|lib/Filter.h|noExplicitConstructor|style: Class 'FilterObject' has a constructor with N argument that is not explicit.
+cppcheck|lib/Filter.h|returnByReference|performance: Function 'capturedTexts()' should return member '_capturedTexts' by const reference.
+cppcheck|lib/Filter.h|returnByReference|performance: Function 'hotSpots()' should return member '_hotspotList' by const reference.
+cppcheck|lib/History.cpp|constVariablePointer|style: Variable 'line' can be declared as pointer to const
+cppcheck|lib/History.cpp|containerOutOfBounds|warning: Either the condition 'i<list.size()' is redundant or 'i' can have the value list.size(). Expression 'list.at(i)' causes access out of bounds.
+cppcheck|lib/History.cpp|cstyleCast|style: C-style pointer casting
+cppcheck|lib/History.cpp|cstyleCast|style: C-style pointer casting
+cppcheck|lib/History.cpp|cstyleCast|style: C-style pointer casting
+cppcheck|lib/History.cpp|cstyleCast|style: C-style pointer casting
+cppcheck|lib/History.cpp|cstyleCast|style: C-style pointer casting
+cppcheck|lib/History.cpp|dangerousTypeCast|warning: Potentially invalid type conversion in old-style C cast, clarify/fix with C++ cast
+cppcheck|lib/History.cpp|dangerousTypeCast|warning: Potentially invalid type conversion in old-style C cast, clarify/fix with C++ cast
+cppcheck|lib/History.cpp|dangerousTypeCast|warning: Potentially invalid type conversion in old-style C cast, clarify/fix with C++ cast
+cppcheck|lib/History.cpp|funcArgNamesDifferent|style: Function 'CompactHistoryScroll' argument N names different: declaration 'maxNbLines' definition 'maxLineCount'.
+cppcheck|lib/History.cpp|funcArgNamesDifferent|style: Function 'CompactHistoryType' argument N names different: declaration 'size' definition 'nbLines'.
+cppcheck|lib/History.cpp|funcArgNamesDifferent|style: Function 'HistoryScrollBuffer' argument N names different: declaration 'maxNbLines' definition 'maxLineCount'.
+cppcheck|lib/History.cpp|funcArgNamesDifferent|style: Function 'addCells' argument N names different: declaration 'a' definition 'text'.
+cppcheck|lib/History.cpp|funcArgNamesDifferent|style: Function 'getCells' argument N names different: declaration 'colno' definition 'startColumn'.
+cppcheck|lib/History.cpp|funcArgNamesDifferent|style: Function 'getCells' argument N names different: declaration 'colno' definition 'startColumn'.
+cppcheck|lib/History.cpp|funcArgNamesDifferent|style: Function 'getCells' argument N names different: declaration 'lineno' definition 'lineNumber'.
+cppcheck|lib/History.cpp|funcArgNamesDifferent|style: Function 'getCells' argument N names different: declaration 'lineno' definition 'lineNumber'.
+cppcheck|lib/History.cpp|funcArgNamesDifferent|style: Function 'getCells' argument N names different: declaration 'res' definition 'buffer'.
+cppcheck|lib/History.cpp|funcArgNamesDifferent|style: Function 'getCells' argument N names different: declaration 'res' definition 'buffer'.
+cppcheck|lib/History.cpp|funcArgNamesDifferent|style: Function 'getLineLen' argument N names different: declaration 'lineno' definition 'lineNumber'.
+cppcheck|lib/History.cpp|funcArgNamesDifferent|style: Function 'getLineLen' argument N names different: declaration 'lineno' definition 'lineNumber'.
+cppcheck|lib/History.cpp|funcArgNamesDifferent|style: Function 'isWrappedLine' argument N names different: declaration 'lineno' definition 'lineNumber'.
+cppcheck|lib/History.cpp|funcArgNamesDifferent|style: Function 'isWrappedLine' argument N names different: declaration 'lineno' definition 'lineNumber'.
+cppcheck|lib/History.cpp|funcArgNamesDifferent|style: Function 'setMaxNbLines' argument N names different: declaration 'nbLines' definition 'lineCount'.
+cppcheck|lib/History.cpp|funcArgNamesDifferent|style: Function 'setMaxNbLines' argument N names different: declaration 'nbLines' definition 'lineCount'.
+cppcheck|lib/History.cpp|noCopyConstructor|warning: Class 'HistoryScroll' does not have a copy constructor which is recommended since it has dynamic memory/resource management.
+cppcheck|lib/History.cpp|noOperatorEq|warning: Class 'HistoryScroll' does not have a operator= which is recommended since it has dynamic memory/resource management.
+cppcheck|lib/History.h|cstyleCast|style: C-style pointer casting
+cppcheck|lib/History.h|functionConst|style: Technically the member function 'Konsole::CompactHistoryBlockList::length' can be const.
+cppcheck|lib/History.h|noExplicitConstructor|style: Class 'CompactHistoryScroll' has a constructor with N argument that is not explicit.
+cppcheck|lib/History.h|noExplicitConstructor|style: Class 'CompactHistoryType' has a constructor with N argument that is not explicit.
+cppcheck|lib/History.h|noExplicitConstructor|style: Class 'HistoryScrollBlockArray' has a constructor with N argument that is not explicit.
+cppcheck|lib/History.h|noExplicitConstructor|style: Class 'HistoryScrollBuffer' has a constructor with N argument that is not explicit.
+cppcheck|lib/History.h|noExplicitConstructor|style: Class 'HistoryScrollFile' has a constructor with N argument that is not explicit.
+cppcheck|lib/History.h|noExplicitConstructor|style: Class 'HistoryTypeBlockArray' has a constructor with N argument that is not explicit.
+cppcheck|lib/History.h|noExplicitConstructor|style: Class 'HistoryTypeBuffer' has a constructor with N argument that is not explicit.
+cppcheck|lib/History.h|noExplicitConstructor|style: Class 'HistoryTypeFile' has a constructor with N argument that is not explicit.
+cppcheck|lib/HistorySearch.cpp|passedByValue|performance: Function parameter 'linePositions' should be passed by const reference.
+cppcheck|lib/HistorySearch.cpp|unreadVariable|style: Variable 'found' is assigned a value that is never used.
+cppcheck|lib/HistorySearch.cpp|variableScope|style: The scope of the variable 'found' can be reduced.
+cppcheck|lib/KeyboardTranslator.cpp|funcArgNamesDifferent|style: Function 'decodeSequence' argument N names different: declaration 'state' definition 'flags'.
+cppcheck|lib/KeyboardTranslator.cpp|funcArgNamesDifferent|style: Function 'decodeSequence' argument N names different: declaration 'stateFlags' definition 'flagMask'.
+cppcheck|lib/KeyboardTranslator.cpp|funcArgNamesDifferent|style: Function 'loadTranslator' argument N names different: declaration 'device' definition 'source'.
+cppcheck|lib/KeyboardTranslator.cpp|funcArgNamesDifferent|style: Function 'matches' argument N names different: declaration 'flags' definition 'testState'.
+cppcheck|lib/KeyboardTranslator.cpp|funcArgNamesDifferent|style: Function 'parseAsStateFlag' argument N names different: declaration 'state' definition 'flag'.
+cppcheck|lib/KeyboardTranslator.cpp|funcArgNamesDifferent|style: Function 'unescape' argument N names different: declaration 'text' definition 'input'.
+cppcheck|lib/KeyboardTranslator.cpp|functionStatic|style: The member function 'Konsole::KeyboardTranslator::Entry::unescape' can be static.
+cppcheck|lib/KeyboardTranslator.cpp|functionStatic|style: The member function 'Konsole::KeyboardTranslatorManager::findTranslatorPath' can be static.
+cppcheck|lib/KeyboardTranslator.cpp|functionStatic|style: The member function 'Konsole::KeyboardTranslatorManager::loadTranslator' can be static.
+cppcheck|lib/KeyboardTranslator.cpp|functionStatic|style: The member function 'Konsole::KeyboardTranslatorReader::decodeSequence' can be static.
+cppcheck|lib/KeyboardTranslator.cpp|functionStatic|style: The member function 'Konsole::KeyboardTranslatorReader::parseError' can be static.
+cppcheck|lib/KeyboardTranslator.cpp|functionStatic|style: The member function 'Konsole::KeyboardTranslatorReader::tokenize' can be static.
+cppcheck|lib/KeyboardTranslator.cpp|knownConditionTrueFalse|style: Condition '!reader.parseError()' is always true
+cppcheck|lib/KeyboardTranslator.cpp|knownConditionTrueFalse|style: Condition '!saveTranslator(translator)' is always false
+cppcheck|lib/KeyboardTranslator.cpp|unreadVariable|style: Variable 'endOfItem' is assigned a value that is never used.
+cppcheck|lib/KeyboardTranslator.cpp|variableScope|style: The scope of the variable 'endOfItem' can be reduced.
+cppcheck|lib/KeyboardTranslator.h|funcArgNamesDifferent|style: Function 'setModifierMask' argument N names different: declaration 'modifiers' definition 'mask'.
+cppcheck|lib/KeyboardTranslator.h|funcArgNamesDifferent|style: Function 'setModifiers' argument N names different: declaration 'modifiers' definition 'modifier'.
+cppcheck|lib/KeyboardTranslator.h|funcArgNamesDifferent|style: Function 'setStateMask' argument N names different: declaration 'mask' definition 'stateMask'.
+cppcheck|lib/KeyboardTranslator.h|noExplicitConstructor|style: Class 'KeyboardTranslator' has a constructor with N argument that is not explicit.
+cppcheck|lib/KeyboardTranslator.h|noExplicitConstructor|style: Class 'KeyboardTranslatorReader' has a constructor with N argument that is not explicit.
+cppcheck|lib/KeyboardTranslator.h|noExplicitConstructor|style: Class 'KeyboardTranslatorWriter' has a constructor with N argument that is not explicit.
+cppcheck|lib/KeyboardTranslator.h|returnByReference|performance: Function 'description()' should return member '_description' by const reference.
+cppcheck|lib/KeyboardTranslator.h|returnByReference|performance: Function 'description()' should return member '_description' by const reference.
+cppcheck|lib/KeyboardTranslator.h|returnByReference|performance: Function 'name()' should return member '_name' by const reference.
+cppcheck|lib/ProcessInfo.cpp|funcArgNamesDifferent|style: Function 'NullProcessInfo' argument N names different: declaration 'pid' definition 'aPid'.
+cppcheck|lib/ProcessInfo.cpp|funcArgNamesDifferent|style: Function 'NullProcessInfo' argument N names different: declaration 'readEnvironment' definition 'enableEnvironmentRead'.
+cppcheck|lib/ProcessInfo.cpp|funcArgNamesDifferent|style: Function 'ProcessInfo' argument N names different: declaration 'pid' definition 'aPid'.
+cppcheck|lib/ProcessInfo.cpp|funcArgNamesDifferent|style: Function 'ProcessInfo' argument N names different: declaration 'readEnvironment' definition 'enableEnvironmentRead'.
+cppcheck|lib/ProcessInfo.cpp|funcArgNamesDifferent|style: Function 'UnixProcessInfo' argument N names different: declaration 'pid' definition 'aPid'.
+cppcheck|lib/ProcessInfo.cpp|funcArgNamesDifferent|style: Function 'UnixProcessInfo' argument N names different: declaration 'readEnvironment' definition 'enableEnvironmentRead'.
+cppcheck|lib/ProcessInfo.cpp|funcArgNamesDifferent|style: Function 'format' argument N names different: declaration 'text' definition 'input'.
+cppcheck|lib/ProcessInfo.cpp|funcArgNamesDifferent|style: Function 'formatShortDir' argument N names different: declaration 'dirPath' definition 'input'.
+cppcheck|lib/ProcessInfo.cpp|funcArgNamesDifferent|style: Function 'newInstance' argument N names different: declaration 'pid' definition 'aPid'.
+cppcheck|lib/ProcessInfo.cpp|funcArgNamesDifferent|style: Function 'newInstance' argument N names different: declaration 'readEnvironment' definition 'enableEnvironmentRead'.
+cppcheck|lib/ProcessInfo.cpp|funcArgNamesDifferent|style: Function 'readProcessInfo' argument N names different: declaration 'pid' definition 'aPid'.
+cppcheck|lib/ProcessInfo.cpp|funcArgNamesDifferent|style: Function 'readProcessInfo' argument N names different: declaration 'readEnvironment' definition 'enableEnvironmentRead'.
+cppcheck|lib/ProcessInfo.cpp|funcArgNamesDifferent|style: Function 'setForegroundPid' argument N names different: declaration 'pid' definition 'aPid'.
+cppcheck|lib/ProcessInfo.cpp|funcArgNamesDifferent|style: Function 'setParentPid' argument N names different: declaration 'pid' definition 'aPid'.
+cppcheck|lib/ProcessInfo.cpp|funcArgNamesDifferent|style: Function 'setPid' argument N names different: declaration 'pid' definition 'aPid'.
+cppcheck|lib/ProcessInfo.cpp|functionStatic|style: The member function 'Konsole::ProcessInfo::formatShortDir' can be static.
+cppcheck|lib/ProcessInfo.cpp|missingOverride|style: The function 'readArguments' overrides a function in a base class but is not marked with a 'override' specifier.
+cppcheck|lib/ProcessInfo.cpp|missingOverride|style: The function 'readCurrentDir' overrides a function in a base class but is not marked with a 'override' specifier.
+cppcheck|lib/ProcessInfo.cpp|missingOverride|style: The function 'readEnvironment' overrides a function in a base class but is not marked with a 'override' specifier.
+cppcheck|lib/ProcessInfo.cpp|missingOverride|style: The function 'readProcInfo' overrides a function in a base class but is not marked with a 'override' specifier.
+cppcheck|lib/ProcessInfo.cpp|variableScope|style: The scope of the variable 'name' can be reduced.
+cppcheck|lib/ProcessInfo.cpp|variableScope|style: The scope of the variable 'uidLine' can be reduced.
+cppcheck|lib/ProcessInfo.cpp|variableScope|style: The scope of the variable 'value' can be reduced.
+cppcheck|lib/ProcessInfo.h|missingOverride|style: The function 'readProcessInfo' overrides a function in a base class but is not marked with a 'override' specifier.
+cppcheck|lib/ProcessInfo.h|missingOverride|style: The function 'readProcessInfo' overrides a function in a base class but is not marked with a 'override' specifier.
+cppcheck|lib/ProcessInfo.h|missingOverride|style: The function 'readUserName' overrides a function in a base class but is not marked with a 'override' specifier.
+cppcheck|lib/ProcessInfo.h|missingOverride|style: The function 'readUserName' overrides a function in a base class but is not marked with a 'override' specifier.
+cppcheck|lib/ProcessInfo.h|returnByReference|performance: Function 'command()' should return member '_command' by const reference.
+cppcheck|lib/ProcessInfo.h|returnByReference|performance: Function 'commonDirNames()' should return member '_commonDirNames' by const reference.
+cppcheck|lib/ProcessInfo.h|returnByReference|performance: Function 'host()' should return member '_host' by const reference.
+cppcheck|lib/ProcessInfo.h|returnByReference|performance: Function 'port()' should return member '_port' by const reference.
+cppcheck|lib/ProcessInfo.h|returnByReference|performance: Function 'userHomeDir()' should return member '_userHomeDir' by const reference.
+cppcheck|lib/ProcessInfo.h|returnByReference|performance: Function 'userName()' should return member '_user' by const reference.
+cppcheck|lib/ProcessInfo.h|returnByReference|performance: Function 'userName()' should return member '_userName' by const reference.
+cppcheck|lib/Pty.cpp|funcArgNamesDifferent|style: Function 'Pty' argument N names different: declaration 'ptyMasterFd' definition 'masterFd'.
+cppcheck|lib/Pty.cpp|funcArgNamesDifferent|style: Function 'sendData' argument N names different: declaration 'buffer' definition 'data'.
+cppcheck|lib/Pty.cpp|funcArgNamesDifferent|style: Function 'setFlowControlEnabled' argument N names different: declaration 'on' definition 'enable'.
+cppcheck|lib/Pty.cpp|funcArgNamesDifferent|style: Function 'setUtfNMode' argument N names different: declaration 'on' definition 'enable'.
+cppcheck|lib/Pty.cpp|funcArgNamesDifferent|style: Function 'start' argument N names different: declaration 'arguments' definition 'programArguments'.
+cppcheck|lib/Pty.cpp|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::Pty::lockPty' can be const.
+cppcheck|lib/Screen.cpp|constVariablePointer|style: Variable 'data' can be declared as pointer to const
+cppcheck|lib/Screen.cpp|funcArgNamesDifferent|style: Function 'Screen' argument N names different: declaration 'columns' definition 'c'.
+cppcheck|lib/Screen.cpp|funcArgNamesDifferent|style: Function 'Screen' argument N names different: declaration 'lines' definition 'l'.
+cppcheck|lib/Screen.cpp|funcArgNamesDifferent|style: Function 'getMode' argument N names different: declaration 'mode' definition 'm'.
+cppcheck|lib/Screen.cpp|funcArgNamesDifferent|style: Function 'isSelected' argument N names different: declaration 'column' definition 'x'.
+cppcheck|lib/Screen.cpp|funcArgNamesDifferent|style: Function 'isSelected' argument N names different: declaration 'line' definition 'y'.
+cppcheck|lib/Screen.cpp|funcArgNamesDifferent|style: Function 'resetMode' argument N names different: declaration 'mode' definition 'm'.
+cppcheck|lib/Screen.cpp|funcArgNamesDifferent|style: Function 'resetRendition' argument N names different: declaration 'rendition' definition 're'.
+cppcheck|lib/Screen.cpp|funcArgNamesDifferent|style: Function 'restoreMode' argument N names different: declaration 'mode' definition 'm'.
+cppcheck|lib/Screen.cpp|funcArgNamesDifferent|style: Function 'saveMode' argument N names different: declaration 'mode' definition 'm'.
+cppcheck|lib/Screen.cpp|funcArgNamesDifferent|style: Function 'scrollDown' argument N names different: declaration 'i' definition 'n'.
+cppcheck|lib/Screen.cpp|funcArgNamesDifferent|style: Function 'scrollUp' argument N names different: declaration 'i' definition 'n'.
+cppcheck|lib/Screen.cpp|funcArgNamesDifferent|style: Function 'setMargins' argument N names different: declaration 'bottomLine' definition 'bot'.
+cppcheck|lib/Screen.cpp|funcArgNamesDifferent|style: Function 'setMargins' argument N names different: declaration 'topLine' definition 'top'.
+cppcheck|lib/Screen.cpp|funcArgNamesDifferent|style: Function 'setMode' argument N names different: declaration 'mode' definition 'm'.
+cppcheck|lib/Screen.cpp|funcArgNamesDifferent|style: Function 'setRendition' argument N names different: declaration 'rendition' definition 're'.
+cppcheck|lib/Screen.cpp|funcArgNamesDifferent|style: Function 'setSelectionEnd' argument N names different: declaration 'column' definition 'x'.
+cppcheck|lib/Screen.cpp|funcArgNamesDifferent|style: Function 'setSelectionEnd' argument N names different: declaration 'line' definition 'y'.
+cppcheck|lib/Screen.cpp|funcArgNamesDifferent|style: Function 'setSelectionStart' argument N names different: declaration 'blockSelectionMode' definition 'mode'.
+cppcheck|lib/Screen.cpp|funcArgNamesDifferent|style: Function 'setSelectionStart' argument N names different: declaration 'column' definition 'x'.
+cppcheck|lib/Screen.cpp|funcArgNamesDifferent|style: Function 'setSelectionStart' argument N names different: declaration 'line' definition 'y'.
+cppcheck|lib/Screen.cpp|functionStatic|style: The member function 'Konsole::Screen::compose' can be static.
+cppcheck|lib/Screen.cpp|functionStatic|style: The member function 'Konsole::Screen::reverseRendition' can be static.
+cppcheck|lib/Screen.cpp|shadowFunction|style: Local variable 'index' shadows outer function
+cppcheck|lib/Screen.cpp|shadowVariable|style: Local variable 'lines' shadows outer variable
+cppcheck|lib/ScreenWindow.h|noExplicitConstructor|style: Class 'ScreenWindow' has a constructor with N argument that is not explicit.
+cppcheck|lib/SearchBar.h|noExplicitConstructor|style: Class 'SearchBar' has a constructor with N argument that is not explicit.
+cppcheck|lib/Session.cpp|funcArgNamesDifferent|style: Function 'onReceiveBlock' argument N names different: declaration 'buffer' definition 'buf'.
+cppcheck|lib/Session.cpp|funcArgNamesDifferent|style: Function 'setHistoryType' argument N names different: declaration 'type' definition 'hType'.
+cppcheck|lib/Session.cpp|funcArgNamesDifferent|style: Function 'setProfileKey' argument N names different: declaration 'profileKey' definition 'key'.
+cppcheck|lib/Session.cpp|funcArgNamesDifferent|style: Function 'setTitle' argument N names different: declaration 'title' definition 'newTitle'.
+cppcheck|lib/Session.cpp|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::Session::size' can be const.
+cppcheck|lib/Session.cpp|functionStatic|style: Either there is a missing 'override', or the member function 'Konsole::Session::windowId' can be static.
+cppcheck|lib/Session.cpp|shadowFunction|style: Local variable 'arguments' shadows outer function
+cppcheck|lib/Session.cpp|unreadVariable|style: Variable 'message' is assigned a value that is never used.
+cppcheck|lib/Session.cpp|unreadVariable|style: Variable 'message' is assigned a value that is never used.
+cppcheck|lib/Session.cpp|unreadVariable|style: Variable 'message' is assigned a value that is never used.
+cppcheck|lib/Session.h|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::Session::initialWorkingDirectory' can be const.
+cppcheck|lib/Session.h|noExplicitConstructor|style: Class 'Session' has a constructor with N argument that is not explicit.
+cppcheck|lib/Session.h|returnByReference|performance: Function 'arguments()' should return member '_arguments' by const reference.
+cppcheck|lib/Session.h|returnByReference|performance: Function 'environment()' should return member '_environment' by const reference.
+cppcheck|lib/Session.h|returnByReference|performance: Function 'iconName()' should return member '_iconName' by const reference.
+cppcheck|lib/Session.h|returnByReference|performance: Function 'iconText()' should return member '_iconText' by const reference.
+cppcheck|lib/Session.h|returnByReference|performance: Function 'initialWorkingDirectory()' should return member '_initialWorkingDir' by const reference.
+cppcheck|lib/Session.h|returnByReference|performance: Function 'profileKey()' should return member '_profileKey' by const reference.
+cppcheck|lib/Session.h|returnByReference|performance: Function 'program()' should return member '_program' by const reference.
+cppcheck|lib/Session.h|returnByReference|performance: Function 'userTitle()' should return member '_userTitle' by const reference.
+cppcheck|lib/Session.h|returnByReference|performance: Function 'views()' should return member '_views' by const reference.
+cppcheck|lib/ShellCommand.cpp|functionStatic|style: The member function 'Konsole::ShellCommand::isAvailable' can be static.
+cppcheck|lib/ShellCommand.cpp|functionStatic|style: The member function 'Konsole::ShellCommand::isRootCommand' can be static.
+cppcheck|lib/ShellCommand.h|noExplicitConstructor|style: Class 'ShellCommand' has a constructor with N argument that is not explicit.
+cppcheck|lib/ShellCommand.h|returnByReference|performance: Function 'arguments()' should return member '_arguments' by const reference.
+cppcheck|lib/TerminalCharacterDecoder.cpp|functionStatic|style: The member function 'Konsole::HTMLDecoder::closeSpan' can be static.
+cppcheck|lib/TerminalCharacterDecoder.cpp|functionStatic|style: The member function 'Konsole::HTMLDecoder::openSpan' can be static.
+cppcheck|lib/TerminalCharacterDecoder.h|returnByReference|performance: Function 'linePositions()' should return member '_linePositions' by const reference.
+cppcheck|lib/TerminalDisplay.cpp|constVariablePointer|style: Variable 'chars' can be declared as pointer to const
+cppcheck|lib/TerminalDisplay.cpp|constVariablePointer|style: Variable 'hotSpot' can be declared as pointer to const
+cppcheck|lib/TerminalDisplay.cpp|constVariablePointer|style: Variable 'spot' can be declared as pointer to const
+cppcheck|lib/TerminalDisplay.cpp|constVariablePointer|style: Variable 'spot' can be declared as pointer to const
+cppcheck|lib/TerminalDisplay.cpp|cstyleCast|style: C-style pointer casting
+cppcheck|lib/TerminalDisplay.cpp|cstyleCast|style: C-style pointer casting
+cppcheck|lib/TerminalDisplay.cpp|cstyleCast|style: C-style pointer casting
+cppcheck|lib/TerminalDisplay.cpp|cstyleCast|style: C-style pointer casting
+cppcheck|lib/TerminalDisplay.cpp|cstyleCast|style: C-style pointer casting
+cppcheck|lib/TerminalDisplay.cpp|cstyleCast|style: C-style pointer casting
+cppcheck|lib/TerminalDisplay.cpp|dangerousTypeCast|warning: Potentially invalid type conversion in old-style C cast, clarify/fix with C++ cast
+cppcheck|lib/TerminalDisplay.cpp|dangerousTypeCast|warning: Potentially invalid type conversion in old-style C cast, clarify/fix with C++ cast
+cppcheck|lib/TerminalDisplay.cpp|dangerousTypeCast|warning: Potentially invalid type conversion in old-style C cast, clarify/fix with C++ cast
+cppcheck|lib/TerminalDisplay.cpp|dangerousTypeCast|warning: Potentially invalid type conversion in old-style C cast, clarify/fix with C++ cast
+cppcheck|lib/TerminalDisplay.cpp|duplicateBreak|style: Consecutive return, break, continue, goto or throw statements are unnecessary.
+cppcheck|lib/TerminalDisplay.cpp|funcArgNamesDifferent|style: Function 'drawBackground' argument N names different: declaration 'color' definition 'backgroundColor'.
+cppcheck|lib/TerminalDisplay.cpp|funcArgNamesDifferent|style: Function 'drawCursor' argument N names different: declaration 'invertColors' definition 'invertCharacterColor'.
+cppcheck|lib/TerminalDisplay.cpp|funcArgNamesDifferent|style: Function 'extendSelection' argument N names different: declaration 'pos' definition 'position'.
+cppcheck|lib/TerminalDisplay.cpp|funcArgNamesDifferent|style: Function 'handleShortcutOverrideEvent' argument N names different: declaration 'event' definition 'keyEvent'.
+cppcheck|lib/TerminalDisplay.cpp|funcArgNamesDifferent|style: Function 'scrollImage' argument N names different: declaration 'region' definition 'screenWindowRegion'.
+cppcheck|lib/TerminalDisplay.cpp|funcArgNamesDifferent|style: Function 'setBracketedPasteMode' argument N names different: declaration 'bracketedPasteMode' definition 'on'.
+cppcheck|lib/TerminalDisplay.cpp|funcArgNamesDifferent|style: Function 'setFlowControlWarningEnabled' argument N names different: declaration 'enabled' definition 'enable'.
+cppcheck|lib/TerminalDisplay.cpp|funcArgNamesDifferent|style: Function 'setRandomSeed' argument N names different: declaration 'seed' definition 'randomSeed'.
+cppcheck|lib/TerminalDisplay.cpp|funcArgNamesDifferent|style: Function 'setScroll' argument N names different: declaration 'lines' definition 'slines'.
+cppcheck|lib/TerminalDisplay.cpp|funcArgNamesDifferent|style: Function 'setSize' argument N names different: declaration 'cols' definition 'columns'.
+cppcheck|lib/TerminalDisplay.cpp|funcArgNamesDifferent|style: Function 'setSize' argument N names different: declaration 'lins' definition 'lines'.
+cppcheck|lib/TerminalDisplay.cpp|funcArgNamesDifferent|style: Function 'setUsesMouse' argument N names different: declaration 'usesMouse' definition 'on'.
+cppcheck|lib/TerminalDisplay.cpp|funcArgNamesDifferent|style: Function 'setVTFont' argument N names different: declaration 'font' definition 'f'.
+cppcheck|lib/TerminalDisplay.cpp|funcArgNamesDifferent|style: Function 'simulateKeySequence' argument N names different: declaration 'sequence' definition 'keySequence'.
+cppcheck|lib/TerminalDisplay.cpp|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::TerminalDisplay::focusNextPrevChild' can be const.
+cppcheck|lib/TerminalDisplay.cpp|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::TerminalDisplay::getScrollbarMaximum' can be const.
+cppcheck|lib/TerminalDisplay.cpp|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::TerminalDisplay::getScrollbarMinimum' can be const.
+cppcheck|lib/TerminalDisplay.cpp|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::TerminalDisplay::getScrollbarValue' can be const.
+cppcheck|lib/TerminalDisplay.cpp|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::TerminalDisplay::motionAfterPasting' can be const.
+cppcheck|lib/TerminalDisplay.cpp|functionStatic|style: Either there is a missing 'override', or the member function 'Konsole::ScrollBar::move' can be static.
+cppcheck|lib/TerminalDisplay.cpp|functionStatic|style: Either there is a missing 'override', or the member function 'Konsole::ScrollBar::setAttribute' can be static.
+cppcheck|lib/TerminalDisplay.cpp|functionStatic|style: Either there is a missing 'override', or the member function 'Konsole::ScrollBar::setAutoFillBackground' can be static.
+cppcheck|lib/TerminalDisplay.cpp|functionStatic|style: Either there is a missing 'override', or the member function 'Konsole::ScrollBar::setCursor' can be static.
+cppcheck|lib/TerminalDisplay.cpp|functionStatic|style: Either there is a missing 'override', or the member function 'Konsole::ScrollBar::setPalette' can be static.
+cppcheck|lib/TerminalDisplay.cpp|functionStatic|style: Either there is a missing 'override', or the member function 'Konsole::TerminalDisplay::showResizeNotification' can be static.
+cppcheck|lib/TerminalDisplay.cpp|knownConditionTrueFalse|style: Condition '!_scrollBar->isTransient()' is always true
+cppcheck|lib/TerminalDisplay.cpp|knownConditionTrueFalse|style: Condition '!_scrollBar->isTransient()' is always true
+cppcheck|lib/TerminalDisplay.cpp|knownConditionTrueFalse|style: Condition '!_scrollBar->isTransient()' is always true
+cppcheck|lib/TerminalDisplay.cpp|redundantAssignment|style: Variable '_fixedFont' is reassigned a value before the old one has been used.
+cppcheck|lib/TerminalDisplay.cpp|shadowFunction|style: Local variable 'columns' shadows outer function
+cppcheck|lib/TerminalDisplay.cpp|shadowFunction|style: Local variable 'columns' shadows outer function
+cppcheck|lib/TerminalDisplay.cpp|shadowFunction|style: Local variable 'event' shadows outer function
+cppcheck|lib/TerminalDisplay.cpp|shadowFunction|style: Local variable 'event' shadows outer function
+cppcheck|lib/TerminalDisplay.cpp|shadowFunction|style: Local variable 'event' shadows outer function
+cppcheck|lib/TerminalDisplay.cpp|shadowFunction|style: Local variable 'event' shadows outer function
+cppcheck|lib/TerminalDisplay.cpp|shadowFunction|style: Local variable 'event' shadows outer function
+cppcheck|lib/TerminalDisplay.cpp|shadowFunction|style: Local variable 'event' shadows outer function
+cppcheck|lib/TerminalDisplay.cpp|shadowFunction|style: Local variable 'font' shadows outer function
+cppcheck|lib/TerminalDisplay.cpp|shadowFunction|style: Local variable 'font' shadows outer function
+cppcheck|lib/TerminalDisplay.cpp|shadowFunction|style: Local variable 'lines' shadows outer function
+cppcheck|lib/TerminalDisplay.cpp|shadowFunction|style: Local variable 'lines' shadows outer function
+cppcheck|lib/TerminalDisplay.cpp|shadowVariable|style: Local variable '_clipboard' shadows outer variable
+cppcheck|lib/TerminalDisplay.cpp|unreadVariable|style: Variable 'linesBeyondWidget' is assigned a value that is never used.
+cppcheck|lib/TerminalDisplay.cpp|unreadVariable|style: Variable 'unistr' is assigned a value that is never used.
+cppcheck|lib/TerminalDisplay.cpp|useInitializationList|performance: Variable 'm_palette' is assigned in constructor body. Consider performing initialization in initialization list.
+cppcheck|lib/TerminalDisplay.cpp|variableScope|style: The scope of the variable 'i' can be reduced.
+cppcheck|lib/TerminalDisplay.h|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::TerminalDisplay::backgroundRole' can be const.
+cppcheck|lib/TerminalDisplay.h|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::TerminalDisplay::bellMode' can be const.
+cppcheck|lib/TerminalDisplay.h|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::TerminalDisplay::blinkingCursor' can be const.
+cppcheck|lib/TerminalDisplay.h|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::TerminalDisplay::columns' can be const.
+cppcheck|lib/TerminalDisplay.h|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::TerminalDisplay::ctrlDrag' can be const.
+cppcheck|lib/TerminalDisplay.h|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::TerminalDisplay::fontHeight' can be const.
+cppcheck|lib/TerminalDisplay.h|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::TerminalDisplay::fontWidth' can be const.
+cppcheck|lib/TerminalDisplay.h|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::TerminalDisplay::getBoldIntense' can be const.
+cppcheck|lib/TerminalDisplay.h|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::TerminalDisplay::getItalicEnabled' can be const.
+cppcheck|lib/TerminalDisplay.h|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::TerminalDisplay::isBidiEnabled' can be const.
+cppcheck|lib/TerminalDisplay.h|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::TerminalDisplay::lines' can be const.
+cppcheck|lib/TerminalDisplay.h|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::TerminalDisplay::palette' can be const.
+cppcheck|lib/TerminalDisplay.h|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::TerminalDisplay::terminalSizeHint' can be const.
+cppcheck|lib/TerminalDisplay.h|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::TerminalDisplay::tripleClickMode' can be const.
+cppcheck|lib/TerminalDisplay.h|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::TerminalDisplay::wordCharacters' can be const.
+cppcheck|lib/TerminalDisplay.h|noExplicitConstructor|style: Class 'AutoScrollHandler' has a constructor with N argument that is not explicit.
+cppcheck|lib/TerminalDisplay.h|noExplicitConstructor|style: Class 'TerminalDisplay' has a constructor with N argument that is not explicit.
+cppcheck|lib/TerminalDisplay.h|returnByReference|performance: Function 'colorScheme()' should return member '_colorScheme' by const reference.
+cppcheck|lib/TerminalDisplay.h|returnByReference|performance: Function 'wordCharacters()' should return member '_wordCharacters' by const reference.
+cppcheck|lib/TerminalDisplay.h|virtualCallInConstructor|style: Virtual function 'fontChange' is called from constructor 'TerminalDisplay(QQuickItem*parent=N)' at line N. Dynamic binding is not used.
+cppcheck|lib/Vt102Emulation.cpp|cstyleCast|style: C-style pointer casting
+cppcheck|lib/Vt102Emulation.cpp|cstyleCast|style: C-style pointer casting
+cppcheck|lib/Vt102Emulation.cpp|cstyleCast|style: C-style pointer casting
+cppcheck|lib/Vt102Emulation.cpp|cstyleCast|style: C-style pointer casting
+cppcheck|lib/Vt102Emulation.cpp|cstyleCast|style: C-style pointer casting
+cppcheck|lib/Vt102Emulation.cpp|funcArgNamesDifferent|style: Function 'addDigit' argument N names different: declaration 'dig' definition 'digit'.
+cppcheck|lib/Vt102Emulation.cpp|funcArgNamesDifferent|style: Function 'getMode' argument N names different: declaration 'mode' definition 'm'.
+cppcheck|lib/Vt102Emulation.cpp|funcArgNamesDifferent|style: Function 'processToken' argument N names different: declaration 'code' definition 'token'.
+cppcheck|lib/Vt102Emulation.cpp|funcArgNamesDifferent|style: Function 'resetMode' argument N names different: declaration 'mode' definition 'm'.
+cppcheck|lib/Vt102Emulation.cpp|funcArgNamesDifferent|style: Function 'restoreMode' argument N names different: declaration 'mode' definition 'm'.
+cppcheck|lib/Vt102Emulation.cpp|funcArgNamesDifferent|style: Function 'saveMode' argument N names different: declaration 'mode' definition 'm'.
+cppcheck|lib/Vt102Emulation.cpp|funcArgNamesDifferent|style: Function 'sendMouseEvent' argument N names different: declaration 'buttons' definition 'cb'.
+cppcheck|lib/Vt102Emulation.cpp|funcArgNamesDifferent|style: Function 'sendMouseEvent' argument N names different: declaration 'column' definition 'cx'.
+cppcheck|lib/Vt102Emulation.cpp|funcArgNamesDifferent|style: Function 'sendMouseEvent' argument N names different: declaration 'line' definition 'cy'.
+cppcheck|lib/Vt102Emulation.cpp|funcArgNamesDifferent|style: Function 'setMargins' argument N names different: declaration 'bottom' definition 'b'.
+cppcheck|lib/Vt102Emulation.cpp|funcArgNamesDifferent|style: Function 'setMargins' argument N names different: declaration 'top' definition 't'.
+cppcheck|lib/Vt102Emulation.cpp|funcArgNamesDifferent|style: Function 'setMode' argument N names different: declaration 'mode' definition 'm'.
+cppcheck|lib/Vt102Emulation.cpp|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::VtNEmulation::applyCharset' can be const.
+cppcheck|lib/Vt102Emulation.cpp|functionConst|style: Either there is a missing 'override', or the member function 'Konsole::VtNEmulation::getMode' can be const.
+cppcheck|lib/Vt102Emulation.h|virtualCallInConstructor|style: Virtual function 'reset' is called from constructor 'VtNEmulation()' at line N. Dynamic binding is not used.
+cppcheck|lib/konsole_wcwidth.cpp|useStlAlgorithm|style: Consider using std::accumulate algorithm instead of a raw loop.
+cppcheck|lib/kprocess.h|functionStatic|style: The member function 'KProcessPrivate::d_func' can be static.
+cppcheck|lib/kprocess.h|noExplicitConstructor|style: Class 'KProcessPrivate' has a constructor with N argument that is not explicit.
+cppcheck|lib/kpty.cpp|dangerousTypeCast|warning: Potentially invalid type conversion in old-style C cast, clarify/fix with C++ cast
+cppcheck|lib/kpty.cpp|dangerousTypeCast|warning: Potentially invalid type conversion in old-style C cast, clarify/fix with C++ cast
+cppcheck|lib/kpty.cpp|dangerousTypeCast|warning: Potentially invalid type conversion in old-style C cast, clarify/fix with C++ cast
+cppcheck|lib/kpty.cpp|functionStatic|style: The member function 'KPtyPrivate::chownpty' can be static.
+cppcheck|lib/kpty.cpp|knownConditionTrueFalse|style: Condition '!d->chownpty(true)' is always false
+cppcheck|lib/kpty.cpp|unreadVariable|style: Variable 'pgrp' is assigned a value that is never used.
+cppcheck|lib/kpty.cpp|unreadVariable|style: Variable 'pgrp' is assigned a value that is never used.
+cppcheck|lib/kpty.h|noExplicitConstructor|style: Class 'KPty' has a constructor with N argument that is not explicit.
+cppcheck|lib/kpty_p.h|functionStatic|style: The member function 'KPtyPrivate::d_func' can be static.
+cppcheck|lib/kpty_p.h|noExplicitConstructor|style: Class 'KPtyPrivate' has a constructor with N argument that is not explicit.
+cppcheck|lib/kptydevice.cpp|dangerousTypeCast|warning: Potentially invalid type conversion in old-style C cast, clarify/fix with C++ cast
+cppcheck|lib/kptydevice.cpp|funcArgNamesDifferent|style: Function 'readData' argument N names different: declaration 'maxSize' definition 'maxlen'.
+cppcheck|lib/kptydevice.cpp|funcArgNamesDifferent|style: Function 'readLineData' argument N names different: declaration 'maxSize' definition 'maxlen'.
+cppcheck|lib/kptydevice.cpp|funcArgNamesDifferent|style: Function 'writeData' argument N names different: declaration 'maxSize' definition 'len'.
+cppcheck|lib/kptydevice.cpp|invalidFunctionArgBool|error: Invalid connect() argument nr N. A non-boolean value is required.
+cppcheck|lib/kptydevice.cpp|invalidFunctionArgBool|error: Invalid connect() argument nr N. A non-boolean value is required.
+cppcheck|lib/kptydevice.h|cstyleCast|style: C-style pointer casting
+cppcheck|lib/kptydevice.h|functionStatic|style: The member function 'KPtyDevicePrivate::d_func' can be static.
+cppcheck|lib/kptydevice.h|noExplicitConstructor|style: Class 'KPtyDevice' has a constructor with N argument that is not explicit.
+cppcheck|lib/kptydevice.h|noExplicitConstructor|style: Class 'KPtyDevicePrivate' has a constructor with N argument that is not explicit.
+cppcheck|lib/kptydevice.h|returnDanglingLifetime|error: Returning pointer to local variable 'tmp' that will be invalid when returning.
+cppcheck|lib/kptydevice.h|virtualCallInConstructor|style: Virtual function 'close' is called from destructor '~KPtyDevice()' at line N. Dynamic binding is not used.
+cppcheck|lib/kptyprocess.h|duplInheritedMember|warning: The class 'KPtyProcess' defines member variable with name 'd_ptr' also defined in its parent class 'KProcess'.
+cppcheck|lib/kptyprocess.h|noExplicitConstructor|style: Class 'KPtyProcess' has a constructor with N argument that is not explicit.
+cppcheck|lib/ksession.cpp|functionConst|style: Either there is a missing 'override', or the member function 'KSession::flowControlEnabled' can be const.
+cppcheck|lib/ksession.cpp|functionConst|style: Either there is a missing 'override', or the member function 'KSession::getInitialWorkingDirectory' can be const.
+cppcheck|lib/ksession.cpp|functionConst|style: Either there is a missing 'override', or the member function 'KSession::getKeyBindings' can be const.
+cppcheck|lib/ksession.cpp|functionConst|style: Either there is a missing 'override', or the member function 'KSession::getRandomSeed' can be const.
+cppcheck|lib/ksession.cpp|functionConst|style: Either there is a missing 'override', or the member function 'KSession::getShellPID' can be const.
+cppcheck|lib/ksession.cpp|functionConst|style: Either there is a missing 'override', or the member function 'KSession::getTitle' can be const.
+cppcheck|lib/ksession.cpp|functionConst|style: Either there is a missing 'override', or the member function 'KSession::keyBindings' can be const.
+cppcheck|lib/ksession.cpp|functionConst|style: Either there is a missing 'override', or the member function 'KSession::selectionChanged' can be const.
+cppcheck|lib/ksession.cpp|functionConst|style: Either there is a missing 'override', or the member function 'KSession::sendText' can be const.
+cppcheck|lib/ksession.cpp|passedByValue|performance: Function parameter 'name' should be passed by const reference.
+cppcheck|lib/ksession.cpp|passedByValue|performance: Function parameter 'name' should be passed by const reference.
+cppcheck|lib/ksession.cpp|passedByValue|performance: Function parameter 'text' should be passed by const reference.
+cppcheck|lib/ksession.h|noExplicitConstructor|style: Class 'KSession' has a constructor with N argument that is not explicit.
+cppcheck|lib/ksession.h|returnByReference|performance: Function 'getInitialWorkingDirectory()' should return member '_initialWorkingDirectory' by const reference.
+cppcheck|lib/ksession.h|returnByReference|performance: Function 'getShellProgram()' should return member 'm_shellProgram' by const reference.
+cppcheck|lib/ksession.h|returnByReference|performance: Function 'getShellProgramArgs()' should return member 'm_shellArgs' by const reference.
+cppcheck|lib/qtermwidget.cpp|constParameterPointer|style: Parameter 'session' can be declared as pointer to const
+cppcheck|lib/qtermwidget.cpp|cstyleCast|style: C-style pointer casting
+cppcheck|lib/qtermwidget.cpp|funcArgNamesDifferent|style: Function 'setColorScheme' argument N names different: declaration 'name' definition 'origName'.
+cppcheck|lib/qtermwidget.cpp|functionStatic|style: The member function 'TermWidgetImpl::createTerminalDisplay' can be static.
+cppcheck|lib/qtermwidget.cpp|noExplicitConstructor|style: Class 'TermWidgetImpl' has a constructor with N argument that is not explicit.
+cppcheck|lib/qtermwidget.cpp|useStlAlgorithm|style: Consider using std::any_of algorithm instead of a raw loop.
+cppcheck|lib/qtermwidget.h|noExplicitConstructor|style: Class 'QTermWidget' has a constructor with N argument that is not explicit.
+cppcheck|lib/qtermwidget.h|noExplicitConstructor|style: Class 'QTermWidget' has a constructor with N argument that is not explicit.
+cppcheck|lib/qtermwidget.h|virtualCallInConstructor|style: Virtual function 'setTerminalFont' is called from constructor 'QTermWidget(QWidget*parent=nullptr)' at line N. Dynamic binding is not used.
+cppcheck|lib/qtermwidget.h|virtualCallInConstructor|style: Virtual function 'setTerminalFont' is called from constructor 'QTermWidget(int startnow,QWidget*parent=nullptr)' at line N. Dynamic binding is not used.
+flawfinder|lib/BlockArray.cpp||[N] (tmpfile) tmpfile:Function tmpfile() has a security flaw on some systems (e.g., older System V systems) (CWE-N).  
+flawfinder|lib/BlockArray.h||[N] (buffer) char:Statically-sized arrays can be improperly restricted, leading to potential overflows or other issues (CWE-N!/CWE-N).  Perform bounds checking, use functions that limit length, or ensure that the size is larger than the maximum possible length. 
+flawfinder|lib/ColorScheme.cpp||[N] (buffer) read:Check buffer boundaries if used in a loop including recursive loops (CWE-N, CWE-N).  
+flawfinder|lib/ColorScheme.cpp||[N] (buffer) read:Check buffer boundaries if used in a loop including recursive loops (CWE-N, CWE-N).  
+flawfinder|lib/ColorScheme.cpp||[N] (buffer) read:Check buffer boundaries if used in a loop including recursive loops (CWE-N, CWE-N).  
+flawfinder|lib/ColorScheme.cpp||[N] (random) random:This function is not sufficiently random for security-related functions such as key and nonce creation (CWE-N).  Use a more secure technique for acquiring random values. 
+flawfinder|lib/ColorScheme.cpp||[N] (random) random:This function is not sufficiently random for security-related functions such as key and nonce creation (CWE-N).  Use a more secure technique for acquiring random values. 
+flawfinder|lib/ColorScheme.cpp||[N] (random) random:This function is not sufficiently random for security-related functions such as key and nonce creation (CWE-N).  Use a more secure technique for acquiring random values. 
+flawfinder|lib/ColorScheme.cpp||[N] (random) random:This function is not sufficiently random for security-related functions such as key and nonce creation (CWE-N).  Use a more secure technique for acquiring random values. 
+flawfinder|lib/ColorScheme.cpp||[N] (random) random:This function is not sufficiently random for security-related functions such as key and nonce creation (CWE-N).  Use a more secure technique for acquiring random values. 
+flawfinder|lib/ColorScheme.cpp||[N] (random) random:This function is not sufficiently random for security-related functions such as key and nonce creation (CWE-N).  Use a more secure technique for acquiring random values. 
+flawfinder|lib/ColorScheme.h||[N] (buffer) read:Check buffer boundaries if used in a loop including recursive loops (CWE-N, CWE-N).  
+flawfinder|lib/ColorScheme.h||[N] (buffer) read:Check buffer boundaries if used in a loop including recursive loops (CWE-N, CWE-N).  
+flawfinder|lib/History.cpp||[N] (buffer) memcpy:Does not check for buffer overflows when copying to destination (CWE-N).  Make sure destination can always hold the source data. 
+flawfinder|lib/History.cpp||[N] (buffer) memcpy:Does not check for buffer overflows when copying to destination (CWE-N).  Make sure destination can always hold the source data. 
+flawfinder|lib/History.cpp||[N] (buffer) memcpy:Does not check for buffer overflows when copying to destination (CWE-N).  Make sure destination can always hold the source data. 
+flawfinder|lib/History.cpp||[N] (buffer) read:Check buffer boundaries if used in a loop including recursive loops (CWE-N, CWE-N).  
+flawfinder|lib/History.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/KeyboardTranslator.cpp||[N] (buffer) char:Statically-sized arrays can be improperly restricted, leading to potential overflows or other issues (CWE-N!/CWE-N).  Perform bounds checking, use functions that limit length, or ensure that the size is larger than the maximum possible length. 
+flawfinder|lib/KeyboardTranslator.cpp||[N] (buffer) char:Statically-sized arrays can be improperly restricted, leading to potential overflows or other issues (CWE-N!/CWE-N).  Perform bounds checking, use functions that limit length, or ensure that the size is larger than the maximum possible length. 
+flawfinder|lib/KeyboardTranslator.cpp||[N] (buffer) strlen:Does not handle strings that are not \N-terminated; if given one it may perform an over-read (it could cause a crash if unprotected) (CWE-N).  
+flawfinder|lib/KeyboardTranslator.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/KeyboardTranslator.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/KeyboardTranslator.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/KeyboardTranslator.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/ProcessInfo.cpp||[N] (buffer) char:Statically-sized arrays can be improperly restricted, leading to potential overflows or other issues (CWE-N!/CWE-N).  Perform bounds checking, use functions that limit length, or ensure that the size is larger than the maximum possible length. 
+flawfinder|lib/ProcessInfo.cpp||[N] (buffer) char:Statically-sized arrays can be improperly restricted, leading to potential overflows or other issues (CWE-N!/CWE-N).  Perform bounds checking, use functions that limit length, or ensure that the size is larger than the maximum possible length. 
+flawfinder|lib/ProcessInfo.cpp||[N] (buffer) char:Statically-sized arrays can be improperly restricted, leading to potential overflows or other issues (CWE-N!/CWE-N).  Perform bounds checking, use functions that limit length, or ensure that the size is larger than the maximum possible length. 
+flawfinder|lib/ProcessInfo.cpp||[N] (buffer) char:Statically-sized arrays can be improperly restricted, leading to potential overflows or other issues (CWE-N!/CWE-N).  Perform bounds checking, use functions that limit length, or ensure that the size is larger than the maximum possible length. 
+flawfinder|lib/ProcessInfo.cpp||[N] (buffer) read:Check buffer boundaries if used in a loop including recursive loops (CWE-N, CWE-N).  
+flawfinder|lib/ProcessInfo.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/ProcessInfo.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/ProcessInfo.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/ProcessInfo.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/ProcessInfo.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/ProcessInfo.cpp||[N] (race) readlink:This accepts filename arguments; if an attacker can move those files or change the link content, a race condition results.  Also, it does not terminate with ASCII NUL. (CWE-N, CWE-N).  Reconsider approach. 
+flawfinder|lib/TerminalCharacterDecoder.cpp||[N] (buffer) wchar_t:Statically-sized arrays can be improperly restricted, leading to potential overflows or other issues (CWE-N!/CWE-N).  Perform bounds checking, use functions that limit length, or ensure that the size is larger than the maximum possible length. 
+flawfinder|lib/TerminalDisplay.cpp||[N] (buffer) memcpy:Does not check for buffer overflows when copying to destination (CWE-N).  Make sure destination can always hold the source data. 
+flawfinder|lib/TerminalDisplay.cpp||[N] (buffer) memcpy:Does not check for buffer overflows when copying to destination (CWE-N).  Make sure destination can always hold the source data. 
+flawfinder|lib/Vt102Emulation.cpp||[N] (buffer) char:Statically-sized arrays can be improperly restricted, leading to potential overflows or other issues (CWE-N!/CWE-N).  Perform bounds checking, use functions that limit length, or ensure that the size is larger than the maximum possible length. 
+flawfinder|lib/Vt102Emulation.cpp||[N] (buffer) char:Statically-sized arrays can be improperly restricted, leading to potential overflows or other issues (CWE-N!/CWE-N).  Perform bounds checking, use functions that limit length, or ensure that the size is larger than the maximum possible length. 
+flawfinder|lib/Vt102Emulation.cpp||[N] (buffer) char:Statically-sized arrays can be improperly restricted, leading to potential overflows or other issues (CWE-N!/CWE-N).  Perform bounds checking, use functions that limit length, or ensure that the size is larger than the maximum possible length. 
+flawfinder|lib/Vt102Emulation.cpp||[N] (buffer) strlen:Does not handle strings that are not \N-terminated; if given one it may perform an over-read (it could cause a crash if unprotected) (CWE-N).  
+flawfinder|lib/Vt102Emulation.h||[N] (buffer) char:Statically-sized arrays can be improperly restricted, leading to potential overflows or other issues (CWE-N!/CWE-N).  Perform bounds checking, use functions that limit length, or ensure that the size is larger than the maximum possible length. 
+flawfinder|lib/Vt102Emulation.h||[N] (buffer) wchar_t:Statically-sized arrays can be improperly restricted, leading to potential overflows or other issues (CWE-N!/CWE-N).  Perform bounds checking, use functions that limit length, or ensure that the size is larger than the maximum possible length. 
+flawfinder|lib/kpty.cpp||[N] (buffer) char:Statically-sized arrays can be improperly restricted, leading to potential overflows or other issues (CWE-N!/CWE-N).  Perform bounds checking, use functions that limit length, or ensure that the size is larger than the maximum possible length. 
+flawfinder|lib/kpty.cpp||[N] (buffer) char:Statically-sized arrays can be improperly restricted, leading to potential overflows or other issues (CWE-N!/CWE-N).  Perform bounds checking, use functions that limit length, or ensure that the size is larger than the maximum possible length. 
+flawfinder|lib/kpty.cpp||[N] (buffer) strlen:Does not handle strings that are not \N-terminated; if given one it may perform an over-read (it could cause a crash if unprotected) (CWE-N).  
+flawfinder|lib/kpty.cpp||[N] (buffer) strlen:Does not handle strings that are not \N-terminated; if given one it may perform an over-read (it could cause a crash if unprotected) (CWE-N).  
+flawfinder|lib/kpty.cpp||[N] (buffer) strncpy:Easily used incorrectly; doesn't always \N-terminate or check for invalid pointers [MS-banned] (CWE-N).  
+flawfinder|lib/kpty.cpp||[N] (buffer) strncpy:Easily used incorrectly; doesn't always \N-terminate or check for invalid pointers [MS-banned] (CWE-N).  
+flawfinder|lib/kpty.cpp||[N] (buffer) strncpy:Easily used incorrectly; doesn't always \N-terminate or check for invalid pointers [MS-banned] (CWE-N).  
+flawfinder|lib/kpty.cpp||[N] (buffer) strncpy:Easily used incorrectly; doesn't always \N-terminate or check for invalid pointers [MS-banned] (CWE-N).  
+flawfinder|lib/kpty.cpp||[N] (buffer) strncpy:Easily used incorrectly; doesn't always \N-terminate or check for invalid pointers [MS-banned] (CWE-N).  
+flawfinder|lib/kpty.cpp||[N] (buffer) strncpy:Easily used incorrectly; doesn't always \N-terminate or check for invalid pointers [MS-banned] (CWE-N).  
+flawfinder|lib/kpty.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/kpty.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/kpty.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/kpty.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/kpty.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/kpty.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/kpty.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/kpty.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/kpty.cpp||[N] (race) access:This usually indicates a security flaw.  If an attacker can change anything along the path between the call to access() and the file's actual use (e.g., by moving files), the attacker can exploit the race condition (CWE-N/CWE-N!).  Set up the correct permissions (e.g., using setuid()) and try to open the file directly. 
+flawfinder|lib/kpty.cpp||[N] (race) chmod:This accepts filename arguments; if an attacker can move those files, a race condition results. (CWE-N).  Use fchmod( ) instead. 
+flawfinder|lib/kpty.cpp||[N] (race) chmod:This accepts filename arguments; if an attacker can move those files, a race condition results. (CWE-N).  Use fchmod( ) instead. 
+flawfinder|lib/kpty.cpp||[N] (race) chown:This accepts filename arguments; if an attacker can move those files, a race condition results. (CWE-N).  Use fchown( ) instead. 
+flawfinder|lib/kpty.cpp||[N] (race) chown:This accepts filename arguments; if an attacker can move those files, a race condition results. (CWE-N).  Use fchown( ) instead. 
+flawfinder|lib/kpty.h||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/kpty.h||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/kptydevice.cpp||[N] (buffer) read:Check buffer boundaries if used in a loop including recursive loops (CWE-N, CWE-N).  
+flawfinder|lib/kptydevice.cpp||[N] (buffer) read:Check buffer boundaries if used in a loop including recursive loops (CWE-N, CWE-N).  
+flawfinder|lib/kptydevice.cpp||[N] (buffer) read:Check buffer boundaries if used in a loop including recursive loops (CWE-N, CWE-N).  
+flawfinder|lib/kptydevice.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/kptydevice.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/kptydevice.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/kptydevice.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/kptydevice.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/kptydevice.h||[N] (buffer) memcpy:Does not check for buffer overflows when copying to destination (CWE-N).  Make sure destination can always hold the source data. 
+flawfinder|lib/kptydevice.h||[N] (buffer) memcpy:Does not check for buffer overflows when copying to destination (CWE-N).  Make sure destination can always hold the source data. 
+flawfinder|lib/kptydevice.h||[N] (buffer) read:Check buffer boundaries if used in a loop including recursive loops (CWE-N, CWE-N).  
+flawfinder|lib/kptydevice.h||[N] (buffer) read:Check buffer boundaries if used in a loop including recursive loops (CWE-N, CWE-N).  
+flawfinder|lib/kptydevice.h||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/kptydevice.h||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/kptyprocess.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/kptyprocess.cpp||[N] (misc) open:Check when opening files - can an attacker redirect it (via symlinks), force the opening of special file type (e.g., device files), move things around to create a race condition, control its ancestors, or change its contents? (CWE-N).  
+flawfinder|lib/qtermwidget.cpp||[N] (shell) system:This causes a new program to execute and is difficult to use safely (CWE-N).  try using a library call that implements the same functionality if available. 
+flawfinder|lib/qtermwidget.cpp||[N] (shell) system:This causes a new program to execute and is difficult to use safely (CWE-N).  try using a library call that implements the same functionality if available. 
+gcc-fanalyzer-O0|lib/Pty.cpp|-Wanalyzer-malloc-leak|warning: leak of ‘<anonymous>.std::function<void()>::std::_Function_base.std::_Function_base::_M_functor.std::_Any_data::_M_unused.std::_Nocopy_types::_M_object’ [CWE-N]
+gcc-fanalyzer-O0|lib/TerminalDisplay.cpp|-Wanalyzer-null-argument|warning: use of NULL where non-null expected [CWE-N]
+gcc-fanalyzer-O0|lib/TerminalDisplay.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O0|lib/TerminalDisplay.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O0|lib/TerminalDisplay.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O0|lib/TerminalDisplay.h|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O0|src/qmltermwidget_plugin.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O0|src/qmltermwidget_plugin.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|lib/ScreenWindow.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|lib/ScreenWindow.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-null-argument|warning: use of NULL where non-null expected [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-null-argument|warning: use of NULL where non-null expected [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-null-argument|warning: use of NULL where non-null expected [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-null-argument|warning: use of NULL where non-null expected [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-null-argument|warning: use of NULL where non-null expected [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-null-argument|warning: use of NULL where non-null expected [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-null-argument|warning: use of NULL where non-null expected [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-null-argument|warning: use of NULL where non-null expected [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-null-argument|warning: use of NULL where non-null expected [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-null-argument|warning: use of NULL where non-null expected [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-null-argument|warning: use of NULL where non-null expected [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-null-argument|warning: use of NULL where non-null expected [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-null-argument|warning: use of NULL where non-null expected [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-null-argument|warning: use of NULL where non-null expected [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-null-argument|warning: use of NULL where non-null expected [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-null-argument|warning: use of NULL where non-null expected [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-null-argument|warning: use of NULL where non-null expected [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-null-argument|warning: use of NULL where non-null expected [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-null-argument|warning: use of NULL where non-null expected [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|lib/TerminalDisplay.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|lib/kptyprocess.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘*(KPtyDevice* const*)<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|lib/kptyprocess.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘*(KPtyDevice* const*)<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|lib/ksession.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|lib/ksession.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|lib/ksession.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|lib/ksession.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|lib/ksession.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|lib/ksession.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|lib/ksession.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|lib/tools.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|src/qmltermwidget_plugin.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|src/qmltermwidget_plugin.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|src/qmltermwidget_plugin.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]
+gcc-fanalyzer-O2|src/qmltermwidget_plugin.cpp|-Wanalyzer-use-of-uninitialized-value|warning: use of uninitialized value ‘<unknown>’ [CWE-N]

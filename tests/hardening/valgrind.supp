@@ -1,0 +1,21 @@
+# Copyright (c) 2026 Herman van Hazendonk <github.com@herrie.org>
+#
+# SPDX-License-Identifier: GPL-2.0-or-later
+#
+# Qt's vectorised string code reads 16 bytes at a time and may run a few
+# bytes past the end of a heap block (never past its page). Memcheck cannot
+# tell that from a real overread. Only these Qt functions, only Addr16.
+
+{
+   qt-simd-metatype-name
+   Memcheck:Addr16
+   obj:*/libQt6Core.so*
+   fun:*qMetaTypeTypeInternal*
+}
+{
+   qt-simd-string-simplified
+   Memcheck:Addr16
+   obj:*/libQt6Core.so*
+   ...
+   fun:*simplified_helper*
+}
