@@ -196,7 +196,9 @@ QPoint ScreenWindow::cursorPosition() const
 
 int ScreenWindow::currentLine() const
 {
-    return qBound(0,_currentLine,lineCount()-windowLines());
+    // The screen can be shorter than the window (a program can shrink it
+    // with CSI 8 t), which left qBound() a maximum below its minimum
+    return qBound(0,_currentLine,qMax(0,lineCount()-windowLines()));
 }
 
 void ScreenWindow::scrollBy( RelativeScrollMode mode , int amount )
