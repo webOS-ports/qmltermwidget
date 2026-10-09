@@ -274,7 +274,8 @@ TEST(Display, answersEveryInputMethodQuery)
     resize(display, 400, 300);
 
     QInputMethodQueryEvent query(Qt::ImEnabled | Qt::ImHints | Qt::ImCursorRectangle
-                                 | Qt::ImSurroundingText | Qt::ImFont);
+                                 | Qt::ImSurroundingText | Qt::ImFont
+                                 | Qt::ImCursorPosition | Qt::ImAnchorPosition);
     QCoreApplication::sendEvent(&display, &query);
 
     CHECK(query.value(Qt::ImEnabled).toBool());
@@ -285,6 +286,8 @@ TEST(Display, answersEveryInputMethodQuery)
     CHECK(query.value(Qt::ImCursorRectangle).toRect().isValid());
     CHECK(query.value(Qt::ImSurroundingText).isValid());
     CHECK(query.value(Qt::ImFont).isValid());
+    CHECK(query.value(Qt::ImAnchorPosition).isValid());
+    CHECK_EQ(query.value(Qt::ImAnchorPosition).toInt(), query.value(Qt::ImCursorPosition).toInt());
 
     setSession(display, nullptr);
 }

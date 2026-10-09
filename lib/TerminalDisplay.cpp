@@ -3314,6 +3314,13 @@ QVariant TerminalDisplay::inputMethodQuery( Qt::InputMethodQuery query ) const
                 // return the cursor position within the current line
                 return cursorPos.x();
             break;
+        case Qt::ImAnchorPosition:
+                // Nothing is selected for the input method: the anchor is the
+                // cursor. Left unanswered it read as 0, and an input method
+                // that compares the two saw a selection whenever the cursor
+                // was not in the first column
+                return cursorPos.x();
+            break;
         case Qt::ImSurroundingText:
             {
                 // return the text from the current line
