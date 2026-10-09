@@ -731,7 +731,6 @@ protected:
     // QMLTermWidget
     void paint(QPainter * painter) override;
     virtual void geometryChange(const QRectF & newGeometry, const QRectF & oldGeometry) override;
-    void inputMethodQuery(QInputMethodQueryEvent *event);
     void itemChange(ItemChange change, const ItemChangeData & value) override;
 
 protected slots:

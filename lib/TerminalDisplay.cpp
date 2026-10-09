@@ -3290,18 +3290,20 @@ void TerminalDisplay::inputMethodEvent( QInputMethodEvent* event )
     event->accept();
 }
 
-void TerminalDisplay::inputMethodQuery(QInputMethodQueryEvent *event)
-{
-    event->setValue(Qt::ImEnabled, true);
-    event->setValue(Qt::ImHints, QVariant(Qt::ImhNoPredictiveText |  Qt::ImhNoAutoUppercase));
-    event->accept();
-}
-
 QVariant TerminalDisplay::inputMethodQuery( Qt::InputMethodQuery query ) const
 {
     const QPoint cursorPos = _screenWindow ? _screenWindow->cursorPosition() : QPoint(0,0);
     switch ( query )
     {
+        case Qt::ImEnabled:
+                return true;
+        case Qt::ImHints:
+                // Commands are not prose: no capitals at the start of a
+                // "sentence", no word completion. PreferLowercase is the
+                // positive form of "no capitals": an input method that
+                // capitalises where a field said nothing (as webos-keyboard
+                // does for web content) cannot see a mere absence
+                return int(Qt::ImhNoPredictiveText | Qt::ImhNoAutoUppercase | Qt::ImhPreferLowercase);
         case Qt::ImCursorRectangle:
                 return imageToWidget(QRect(cursorPos.x(),cursorPos.y(),1,1));
             break;
@@ -3316,6 +3318,8 @@ QVariant TerminalDisplay::inputMethodQuery( Qt::InputMethodQuery query ) const
             {
                 // return the text from the current line
                 QString lineText;
+                if (!_image || cursorPos.y() < 0 || cursorPos.y() >= _usedLines)
+                    return lineText;
                 QTextStream stream(&lineText);
                 PlainTextDecoder decoder;
                 decoder.begin(&stream);
@@ -3396,10 +3400,10 @@ bool TerminalDisplay::event(QEvent* event)
     case QEvent::ApplicationPaletteChange:
         _scrollBar->setPalette( QApplication::palette() );
         break;
-    case QEvent::InputMethodQuery:
-        inputMethodQuery(static_cast<QInputMethodQueryEvent *>(event));
-        eventHandled = true;
-        break;
+    // Input method queries are left to QQuickItem::event(), which answers
+    // each of them through inputMethodQuery(Qt::InputMethodQuery). This
+    // answered two and swallowed the rest (cursor rectangle, surrounding
+    // text, font).
     default:
         break;
   }

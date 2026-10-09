@@ -24,6 +24,7 @@
 
 #include <QApplication>
 #include <QClipboard>
+#include <QInputMethodQueryEvent>
 #include <QKeyEvent>
 
 #include <climits>
@@ -257,4 +258,33 @@ TEST(Display, codePointsBeyondTheFirstPlane)
     display.simulateMouseDoubleClick(5, 5, Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
     CHECK_CONTAINS(window->selectedText(false), QString());
     CHECK(display.lines() >= 1);
+}
+
+/*
+ * The input method asks for several properties in one query event. The
+ * display answered only ImEnabled and ImHints and marked the event handled,
+ * so the cursor rectangle, the surrounding text and the font never reached
+ * the keyboard.
+ */
+TEST(Display, answersEveryInputMethodQuery)
+{
+    TerminalDisplay display;
+    KSession session;
+    setSession(display, &session);
+    resize(display, 400, 300);
+
+    QInputMethodQueryEvent query(Qt::ImEnabled | Qt::ImHints | Qt::ImCursorRectangle
+                                 | Qt::ImSurroundingText | Qt::ImFont);
+    QCoreApplication::sendEvent(&display, &query);
+
+    CHECK(query.value(Qt::ImEnabled).toBool());
+    const int hints = query.value(Qt::ImHints).toInt();
+    CHECK(hints & Qt::ImhNoAutoUppercase);
+    CHECK(hints & Qt::ImhNoPredictiveText);
+    CHECK(hints & Qt::ImhPreferLowercase);
+    CHECK(query.value(Qt::ImCursorRectangle).toRect().isValid());
+    CHECK(query.value(Qt::ImSurroundingText).isValid());
+    CHECK(query.value(Qt::ImFont).isValid());
+
+    setSession(display, nullptr);
 }
