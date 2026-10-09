@@ -32,6 +32,7 @@
 #include <cerrno>
 #include <climits>
 #include <cstring>
+#include <new>
 
 #include <QtDebug>
 
@@ -281,7 +282,18 @@ void HistoryScrollFile::getCells(int lineno, int colno, int count, Character res
 
 void HistoryScrollFile::addCells(const Character text[], int count)
 {
-  cells.add((unsigned char*)text,count*sizeof(Character));
+  // Field by field into zeroed storage: written as they are, the cells took
+  // their padding bytes (uninitialised memory) into the file with them
+  QByteArray bytes(count * static_cast<int>(sizeof(Character)), '\0');
+  for (int i = 0; i < count; i++)
+  {
+    Character* cell = new (bytes.data() + i * sizeof(Character)) Character();
+    cell->character = text[i].character;
+    cell->rendition = text[i].rendition;
+    cell->foregroundColor = text[i].foregroundColor;
+    cell->backgroundColor = text[i].backgroundColor;
+  }
+  cells.add(reinterpret_cast<const unsigned char*>(bytes.constData()), bytes.size());
 }
 
 void HistoryScrollFile::addLine(bool previousWrapped)
