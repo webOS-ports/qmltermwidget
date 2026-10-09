@@ -85,10 +85,13 @@ KPtyProcess::~KPtyProcess()
 {
     Q_D(KPtyProcess);
 
+    // ~QProcess still kills a running child and emits stateChanged(), by
+    // which time d_ptr is gone: the lambda must not run then
+    disconnect(this, &QProcess::stateChanged, this, nullptr);
+
     if (state() != QProcess::NotRunning && d->addUtmp)
     {
         d->pty->logout();
-        disconnect(this, &QProcess::stateChanged, this, nullptr);
     }
 }
 

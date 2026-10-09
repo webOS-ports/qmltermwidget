@@ -35,6 +35,7 @@
 #include <QStringList>
 #include <QFile>
 #include <QtDebug>
+#include <QMetaMethod>
 #include <QRegularExpression>
 
 #include "Pty.h"
@@ -258,6 +259,12 @@ void Session::removeView(TerminalDisplay * widget)
 
 void Session::run()
 {
+    // Without a pty the shell would end up on the application's own stdio
+    if (_shellProcess->pty()->masterFd() < 0) {
+        qWarning() << "Unable to open a pseudo-terminal, not starting" << _program;
+        return;
+    }
+
     // Upon a KPty error, there is no description on what that error was...
     // Check to see if the given program is executable.
 
@@ -319,7 +326,7 @@ void Session::run()
      */
     int result = _shellProcess->start(exec,
                                       arguments,
-                                      _environment << backgroundColorHint,
+                                      QStringList(_environment) << backgroundColorHint,
                                       windowId(),
                                       _addToUtmp);
 
@@ -375,11 +382,6 @@ void Session::setUserTitle( int what, const QString & caption )
         if (backColor.isValid()) { // change color via \033]11;Color\007
             if (backColor != _modifiedBackground) {
                 _modifiedBackground = backColor;
-
-                // bail out here until the code to connect the terminal display
-                // to the changeBackgroundColor() signal has been written
-                // and tested - just so we don't forget to do this.
-                Q_ASSERT( 0 );
 
                 emit changeBackgroundColorRequest(backColor);
             }
@@ -625,6 +627,7 @@ void Session::sendKeyEvent(QKeyEvent* e) const
 Session::~Session()
 {
     close();
+    delete _foregroundProcessInfo;
     delete _emulation;
     delete _shellProcess;
 //  delete _zmodemProc;
@@ -958,7 +961,12 @@ void Session::zmodemFinished()
 void Session::onReceiveBlock( const char * buf, int len )
 {
     _emulation->receiveData( buf, len );
-    emit receivedData( QString::fromLatin1( buf, len ) );
+
+    // Only decoded for someone listening: the shell's output is UTF-8,
+    // not Latin-1, and nothing in the library connects to this
+    static const QMetaMethod receivedDataSignal = QMetaMethod::fromSignal(&Session::receivedData);
+    if (isSignalConnected(receivedDataSignal))
+        emit receivedData( QString::fromUtf8( buf, len ) );
 }
 
 QSize Session::size()
