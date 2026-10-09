@@ -335,7 +335,7 @@ void ColorScheme::readColorEntry(QSettings * s , int index)
     ColorEntry entry;
 
     QVariant colorValue = s->value(QLatin1String("Color"));
-    QStringView colorStr;
+    QString colorStr;
     int r, g, b;
     bool ok = false;
     // XXX: Undocumented(?) QSettings behavior: values with commas are parsed
@@ -562,7 +562,8 @@ bool ColorSchemeManager::loadColorScheme(const QString& filePath)
 
     QFileInfo info(filePath);
 
-    const QString& schemeName = info.baseName();
+    // all of "a.b.colorscheme" names the scheme, not just "a"
+    const QString schemeName = info.completeBaseName();
 
     ColorScheme* scheme = new ColorScheme();
     scheme->setName(schemeName);
@@ -637,6 +638,10 @@ QString ColorSchemeManager::findColorSchemePath(const QString& name) const
     if ( dirs.isEmpty() )
         return QString();
 
+    // The name comes from QML: it names a file in the directory, not a path
+    if ( name.contains(QLatin1Char('/')) )
+        return QString();
+
     const QString dir = dirs.first();
     QString path(dir + QLatin1Char('/')+ name + QLatin1String(".colorscheme"));
     if ( !path.isEmpty() )
@@ -658,9 +663,11 @@ const ColorScheme* ColorSchemeManager::findColorScheme(const QString& name)
     {
         // look for this color scheme
         QString path = findColorSchemePath(name);
+        // No recursion: if the file holds another name than asked for, the
+        // lookup would load it again forever
         if ( !path.isEmpty() && loadColorScheme(path) )
         {
-            return findColorScheme(name);
+            return _colorSchemes.value(name, nullptr);
         }
 
         //qDebug() << "Could not find color scheme - " << name;

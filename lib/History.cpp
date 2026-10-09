@@ -30,6 +30,8 @@
 #include <sys/mman.h>
 #include <unistd.h>
 #include <cerrno>
+#include <climits>
+#include <cstring>
 
 #include <QtDebug>
 
@@ -146,6 +148,9 @@ void HistoryFile::add(const unsigned char* bytes, int len)
 
   int rc = 0;
 
+  // Offsets into the file are ints; stop recording rather than wrap around
+  if (len < 0 || len > INT_MAX - length) { return; }
+
   rc = KDE_lseek(ion,length,SEEK_SET); if (rc < 0) { perror("HistoryFile::add.seek"); return; }
   rc = write(ion,bytes,len);       if (rc < 0) { perror("HistoryFile::add.write"); return; }
   length += rc;
@@ -161,6 +166,14 @@ void HistoryFile::get(unsigned char* bytes, int len, int loc)
   if ( !fileMap && readWriteBalance < MAP_THRESHOLD )
           map();
 
+  if (loc < 0 || len < 0 || static_cast<qint64>(loc) + len > length)
+  {
+    fprintf(stderr,"getHist(...,%d,%d): invalid args.\n",len,loc);
+    if (len > 0)
+      memset(bytes, 0, len);
+    return;
+  }
+
   if ( fileMap )
   {
     for (int i=0;i<len;i++)
@@ -170,10 +183,11 @@ void HistoryFile::get(unsigned char* bytes, int len, int loc)
   {
       int rc = 0;
 
-      if (loc < 0 || len < 0 || loc + len > length)
-        fprintf(stderr,"getHist(...,%d,%d): invalid args.\n",len,loc);
-      rc = KDE_lseek(ion,loc,SEEK_SET); if (rc < 0) { perror("HistoryFile::get.seek"); return; }
-      rc = read(ion,bytes,len);     if (rc < 0) { perror("HistoryFile::get.read"); return; }
+      rc = KDE_lseek(ion,loc,SEEK_SET); if (rc < 0) { perror("HistoryFile::get.seek"); memset(bytes, 0, len); return; }
+      rc = read(ion,bytes,len);     if (rc < 0) { perror("HistoryFile::get.read"); memset(bytes, 0, len); return; }
+      // a short read leaves the rest of the caller's buffer as it was
+      if (rc < len)
+        memset(bytes + rc, 0, static_cast<size_t>(len - rc));
   }
 }
 
@@ -236,8 +250,8 @@ int HistoryScrollFile::getLineLen(int lineno) const
 
 bool HistoryScrollFile::isWrappedLine(int lineno) const
 {
-  if (lineno>=0 && lineno <= getLines()) {
-    unsigned char flag;
+  if (lineno>=0 && lineno < getLines()) {
+    unsigned char flag = 0;
     lineflags.get((unsigned char*)&flag,sizeof(unsigned char),(lineno)*sizeof(unsigned char));
     return flag;
   }
@@ -300,6 +314,10 @@ HistoryScrollBuffer::~HistoryScrollBuffer()
 
 void HistoryScrollBuffer::addCellsVector(const QVector<Character>& cells)
 {
+    // A zero-line buffer keeps nothing (and bufferIndex() would divide by 0)
+    if ( _maxLineCount == 0 )
+        return;
+
     _head++;
     if ( _usedLines < _maxLineCount )
         _usedLines++;
@@ -322,6 +340,9 @@ void HistoryScrollBuffer::addCells(const Character a[], int count)
 
 void HistoryScrollBuffer::addLine(bool previousWrapped)
 {
+    if ( _usedLines == 0 )
+        return;
+
     _wrappedLine[bufferIndex(_usedLines-1)] = previousWrapped;
 }
 
@@ -384,20 +405,27 @@ void HistoryScrollBuffer::setMaxNbLines(unsigned int lineCount)
 {
     HistoryLine* oldBuffer = _historyBuffer;
     HistoryLine* newBuffer = new HistoryLine[lineCount];
+    QBitArray newWrappedLine(lineCount);
 
-    for ( int i = 0 ; i < qMin(_usedLines,static_cast<int>(lineCount)) ; i++ )
+    // Keep the newest lines, oldest first, with their wrap flags. This kept
+    // the oldest ones before, in rotated order, with the flags left behind.
+    const int keep = qMin(_usedLines, static_cast<int>(lineCount));
+    const int first = _usedLines - keep;
+    for ( int i = 0 ; i < keep ; i++ )
     {
-        newBuffer[i] = oldBuffer[bufferIndex(i)];
+        newBuffer[i] = oldBuffer[bufferIndex(first + i)];
+        newWrappedLine[i] = _wrappedLine[bufferIndex(first + i)];
     }
 
-    _usedLines = qMin(_usedLines,static_cast<int>(lineCount));
+    _usedLines = keep;
     _maxLineCount = lineCount;
-    _head = ( _usedLines == _maxLineCount ) ? 0 : _usedLines-1;
+    // The newest line, whether or not the buffer is full
+    _head = _usedLines - 1;
 
     _historyBuffer = newBuffer;
     delete[] oldBuffer;
 
-    _wrappedLine.resize(lineCount);
+    _wrappedLine = newWrappedLine;
     dynamic_cast<HistoryTypeBuffer*>(m_histType)->m_nbLines = lineCount;
 }
 
@@ -919,7 +947,7 @@ const QString& HistoryTypeFile::getFileName() const
 
 HistoryScroll* HistoryTypeFile::scroll(HistoryScroll *old) const
 {
-  if (dynamic_cast<HistoryFile *>(old))
+  if (dynamic_cast<HistoryScrollFile *>(old))
      return old; // Unchanged.
 
   HistoryScroll *newScroll = new HistoryScrollFile(m_fileName);

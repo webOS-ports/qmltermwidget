@@ -9,8 +9,8 @@ class QmltermwidgetPlugin : public QQmlExtensionPlugin
     Q_PLUGIN_METADATA(IID "org.qterminal.qmlterminal.QMLTermWidget")
     
 public:
-    void registerTypes(const char *uri);
-    void initializeEngine(QQmlEngine *engine, const char *uri);
+    void registerTypes(const char *uri) override;
+    void initializeEngine(QQmlEngine *engine, const char *uri) override;
 };
 
 #endif // QMLTERMWIDGET_PLUGIN_H
