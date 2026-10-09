@@ -27,6 +27,7 @@
 #include "BlockArray.h"
 
 // System
+#include <fcntl.h>
 #include <sys/mman.h>
 #include <sys/param.h>
 #include <unistd.h>
@@ -207,11 +208,13 @@ bool BlockArray::setHistorySize(size_t newsize)
         if (!tmp) {
             perror("konsole: cannot open temp file.\n");
         } else {
-            ion = dup(fileno(tmp));
+            // Keep a descriptor of our own and let the FILE go, which used
+            // to leak along with a second descriptor
+            ion = fcntl(fileno(tmp), F_DUPFD_CLOEXEC, 0);
             if (ion<0) {
                 perror("konsole: cannot dup temp file.\n");
-                fclose(tmp);
             }
+            fclose(tmp);
         }
         if (ion < 0) {
             return false;
