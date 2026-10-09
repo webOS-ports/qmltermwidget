@@ -477,7 +477,7 @@ private:
             int field = 0;
             int pos = 0;
 
-            while (pos < data.count()) {
+            while (pos < data.size()) {
                 QChar c = data[pos];
 
                 if (c == '(') {
