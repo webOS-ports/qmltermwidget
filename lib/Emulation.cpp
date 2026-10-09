@@ -351,6 +351,14 @@ void Emulation::setImageSize(int lines, int columns)
   if ((lines < 1) || (columns < 1))
     return;
 
+  // Programs can ask for any size (CSI 8 t): "\e[8;40000;40000t" asked for
+  // two 1.6 billion cell screens. No display needs more than this, and it
+  // keeps every cell index well inside an int.
+  const int maxLines = 1024;
+  const int maxColumns = 1024;
+  lines = qMin(lines, maxLines);
+  columns = qMin(columns, maxColumns);
+
   QSize screenSize[2] = { QSize(_screen[0]->getColumns(),
                                 _screen[0]->getLines()),
                           QSize(_screen[1]->getColumns(),

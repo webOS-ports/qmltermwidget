@@ -32,6 +32,7 @@
 
 // Qt
 #include <QTextStream>
+#include <QVarLengthArray>
 #include <QDate>
 
 // KDE
@@ -737,8 +738,11 @@ void Screen::displayCharacter(wchar_t c)
         if ((currentChar.rendition & RE_EXTENDED_CHAR) == 0)
         {
             uint chars[2] = { static_cast<uint>(currentChar.character), static_cast<uint>(c) };
+            const wchar_t combined = ExtendedCharTable::instance.createExtendedChar(chars, 2);
             currentChar.rendition |= RE_EXTENDED_CHAR;
-            currentChar.character = ExtendedCharTable::instance.createExtendedChar(chars, 2);
+            currentChar.character = combined;
+            // currentChar is a reference into its line, which the resize and
+            // insertChars() below may reallocate: do not touch it from here on
 
             // when there is a pair of flag codes
             if (w > 0)
@@ -775,7 +779,7 @@ void Screen::displayCharacter(wchar_t c)
 
                 lastPos = loc(cuX,cuY);
                 checkSelection(lastPos, lastPos);
-                lastDrawnChar = currentChar.character;
+                lastDrawnChar = combined;
 
                 cuX++;
             }
@@ -1346,14 +1350,9 @@ int Screen::copyLineToStream(int line ,
         bool appendNewLine,
         bool preserveLineBreaks) const
 {
-    //buffer to hold characters for decoding
-    //the buffer is static to avoid initialising every
-    //element on each call to copyLineToStream
-    //(which is unnecessary since all elements will be overwritten anyway)
-    static const int MAX_CHARS = 1024;
-    static Character characterBuffer[MAX_CHARS];
-
-    Q_ASSERT( count < MAX_CHARS );
+    // Holds the line for decoding: as wide as the line plus a line break,
+    // which used to overflow a fixed 1024-cell buffer on wider lines
+    QVarLengthArray<Character, 1024> characterBuffer;
 
     LineProperty currentLineProperties = 0;
 
@@ -1382,7 +1381,9 @@ int Screen::copyLineToStream(int line ,
         Q_ASSERT( count >= 0 );
         Q_ASSERT( (start+count) <= history->getLineLen(line) );
 
-        history->getCells(line,start,count,characterBuffer);
+        count = qMax(count, 0);
+        characterBuffer.resize(count + 1);
+        history->getCells(line,start,count,characterBuffer.data());
 
         if ( history->isWrappedLine(line) )
             currentLineProperties |= LINE_WRAPPED;
@@ -1408,13 +1409,14 @@ int Screen::copyLineToStream(int line ,
             count = qMin(count, length - start);
         }
 
-        for (int i=start; i < qMin(start+count,length); i++)
+        // count cannot be any greater than remaining line length
+        count = qBound(0,count,length-start);
+
+        characterBuffer.resize(count + 1);
+        for (int i=start; i < start+count; i++)
         {
             characterBuffer[i-start] = data[i];
         }
-
-        // count cannot be any greater than remaining line length
-        count = qBound(0,count,length-start);
 
         Q_ASSERT( screenLine < lineProperties.count() );
         currentLineProperties |= lineProperties[screenLine];
@@ -1424,14 +1426,14 @@ int Screen::copyLineToStream(int line ,
     const bool omitLineBreak = (currentLineProperties & LINE_WRAPPED) ||
         !preserveLineBreaks;
 
-    if ( !omitLineBreak && appendNewLine && (count+1 < MAX_CHARS) )
+    if ( !omitLineBreak && appendNewLine )
     {
         characterBuffer[count] = '\n';
         count++;
     }
 
     //decode line and write to text stream
-    decoder->decodeLine( (Character*) characterBuffer ,
+    decoder->decodeLine( characterBuffer.data() ,
             count, currentLineProperties );
 
     return count;
@@ -1439,6 +1441,12 @@ int Screen::copyLineToStream(int line ,
 
 void Screen::writeLinesToStream(TerminalCharacterDecoder* decoder, int fromLine, int toLine) const
 {
+    // Callers such as a search pass lines straight from QML
+    fromLine = qMax(0, fromLine);
+    toLine = qMin(toLine, getHistLines() + lines - 1);
+    if (fromLine > toLine)
+        return;
+
     writeToStream(decoder,loc(0,fromLine),loc(columns-1,toLine));
 }
 

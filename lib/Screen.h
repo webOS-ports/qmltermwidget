@@ -703,7 +703,7 @@ private:
     int lastPos;
 
     // used in REP (repeating char)
-    unsigned short lastDrawnChar;
+    wchar_t lastDrawnChar;
 
     static Character defaultChar;
 };
