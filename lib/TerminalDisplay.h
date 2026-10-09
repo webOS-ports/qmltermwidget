@@ -236,11 +236,11 @@ public:
     /** See setTripleClickSelectionMode() */
     TripleClickMode tripleClickMode() { return _tripleClickMode; }
 
-    void setLineSpacing(uint);
+    void setLineSpacing(int);
     void setMargin(int);
 
     int margin() const;
-    uint lineSpacing() const;
+    int lineSpacing() const;
 
     void emitSelection(bool useXselection,bool appendReturn);
 
@@ -707,9 +707,9 @@ protected:
     enum DragState { diNone, diPending, diDragging };
 
     struct _dragInfo {
-      DragState       state;
+      DragState       state = diNone;
       QPoint          start;
-      QDrag           *dragObject;
+      QDrag           *dragObject = nullptr;
     } dragInfo;
 
     // classifies the 'ch' into one of three categories
@@ -976,7 +976,7 @@ private:
     QFont m_font;
     QPalette m_palette;
     QPalette::ColorRole m_color_role;
-    KSession *m_session;
+    QPointer<KSession> m_session;
     bool m_full_cursor_height;
 
     QFont font() const { return m_font; }
@@ -1068,6 +1068,7 @@ public:
 
 Q_SIGNALS:
     void valueChanged(int value);
+    void rangeChanged();
 
 private:
     int m_minimum{0};

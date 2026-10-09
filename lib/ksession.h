@@ -54,6 +54,7 @@ public:
     //bool setup();
     void addView(Konsole::TerminalDisplay *display);
     void removeView(Konsole::TerminalDisplay *display);
+    void detachView(Konsole::TerminalDisplay *display);
 
     int getRandomSeed();
     QString getKeyBindings();

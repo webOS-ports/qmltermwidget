@@ -232,7 +232,7 @@ unsigned short Konsole::vt100_graphics[32] =
 void TerminalDisplay::fontChange(const QFont&)
 {
   QFontMetrics fm(font());
-  _fontHeight = fm.height() + _lineSpacing;
+  _fontHeight = qMax(fm.height() + static_cast<int>(_lineSpacing), 1);
 
   // waba TerminalDisplay 1.123:
   // "Base character width on widest ASCII character. This prevents too wide
@@ -421,7 +421,6 @@ TerminalDisplay::TerminalDisplay(QQuickItem *parent)
 ,_topBaseMargin(1)
 ,m_font("Monospace", 12)
 ,m_color_role(QPalette::Window)
-,m_session(nullptr)
 ,m_full_cursor_height(false)
 ,_drawLineChars(true)
 ,_mouseAutohideDelay(-1)
@@ -442,7 +441,7 @@ TerminalDisplay::TerminalDisplay(QQuickItem *parent)
 
   // create scroll bar for scrolling output up and down
   // set the scroll bar's slider to occupy the whole area of the scroll bar initially
-  _scrollBar = new ScrollBar();
+  _scrollBar = new ScrollBar(this);
   // since the contrast with the terminal background may not be enough,
   // the scrollbar should be auto-filled if not transient
   if (!_scrollBar->isTransient())
@@ -473,6 +472,7 @@ TerminalDisplay::TerminalDisplay(QQuickItem *parent)
     //Setup scrollbar. Be sure it is not darw on screen.
   _scrollBar->setVisible(false);
   connect(_scrollBar, SIGNAL(valueChanged(int)), this, SIGNAL(scrollbarParamsChanged(int)));
+  connect(_scrollBar, &ScrollBar::rangeChanged, this, [this]() { emit scrollbarParamsChanged(_scrollBar->value()); });
 
   setUseFBORendering(true);
 
@@ -2212,6 +2212,9 @@ void TerminalDisplay::scrollToEnd()
   _scrollBar->setValue( _scrollBar->maximum() );
   connect(_scrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrollBarPositionChanged(int)));
 
+  if ( !_screenWindow )
+      return;
+
   _screenWindow->scrollTo( _scrollBar->value() + 1 );
   _screenWindow->setTrackOutput( _screenWindow->atEndOfOutput() );
 }
@@ -3071,6 +3074,20 @@ bool TerminalDisplay::bracketedPasteMode() const
 
 #undef KeyPress
 
+/*
+ * Drops the control characters from pasted text, keeping tab and the
+ * carriage returns that stand for line breaks: an ESC in the clipboard could
+ * otherwise end a bracketed paste early ("\e[201~") and have the rest run as
+ * typed commands. xterm filters pastes the same way by default.
+ */
+static void removePasteControls(QString& text)
+{
+    text.removeIf([](QChar c) {
+        const char16_t u = c.unicode();
+        return (u < 0x20 && u != u'\t' && u != u'\r') || u == 0x7f || (u >= 0x80 && u <= 0x9f);
+    });
+}
+
 void TerminalDisplay::emitSelection(bool useXselection,bool appendReturn)
 {
   if ( !_screenWindow )
@@ -3095,6 +3112,7 @@ void TerminalDisplay::emitSelection(bool useXselection,bool appendReturn)
         }
     }
 
+    removePasteControls(text);
     bracketText(text);
 
     // appendReturn is intentionally handled _after_ enclosing texts with brackets as
@@ -3411,7 +3429,8 @@ void TerminalDisplay::bell(const QString& message)
 
 void TerminalDisplay::selectionChanged()
 {
-    emit copyAvailable(_screenWindow->selectedText(false).isEmpty() == false);
+    if (_screenWindow)
+        emit copyAvailable(_screenWindow->selectedText(false).isEmpty() == false);
 }
 
 void TerminalDisplay::swapColorTable()
@@ -3604,7 +3623,9 @@ void TerminalDisplay::dropEvent(QDropEvent* event)
     }
   }
 
-  emit sendStringToEmu(dropText.toLocal8Bit().constData());
+  removePasteControls(dropText);
+  bracketText(dropText);
+  emit sendStringToEmu(dropText.toUtf8().constData());
 }
 
 void TerminalDisplay::doDrag()
@@ -3659,14 +3680,15 @@ void TerminalDisplay::outputSuspended(bool suspended)
     _outputSuspendedLabel->setVisible(suspended);
 }
 
-uint TerminalDisplay::lineSpacing() const
+int TerminalDisplay::lineSpacing() const
 {
   return _lineSpacing;
 }
 
-void TerminalDisplay::setLineSpacing(uint i)
+void TerminalDisplay::setLineSpacing(int i)
 {
-    if ( i != _lineSpacing ) {
+    i = qMax(i, 0);
+    if ( static_cast<uint>(i) != _lineSpacing ) {
       _lineSpacing = i;
       setVTFont(font()); // Trigger an update.
       emit lineSpacingChanged();
@@ -3784,28 +3806,36 @@ QSize TerminalDisplay::size() const
 
 void TerminalDisplay::setSession(KSession * session)
 {
-    if (m_session != session) {
-//        qDebug() << "SetSession called";
-//        if (m_session)
-//            m_session->removeView(this);
+    if (m_session == session)
+        return;
 
-        m_session = session;
-
-            connect(this, SIGNAL(copyAvailable(bool)),
-                    m_session, SLOT(selectionChanged(bool)));
-            connect(this, SIGNAL(termGetFocus()),
-                    m_session, SIGNAL(termGetFocus()));
-            connect(this, SIGNAL(termLostFocus()),
-                    m_session, SIGNAL(termLostFocus()));
-        connect(this, SIGNAL(keyPressedSignal(QKeyEvent *, bool)),
-                m_session, SIGNAL(termKeyPressed(QKeyEvent *, bool)));
-
-        m_session->addView(this);
-
-        setRandomSeed(m_session->getRandomSeed());
-        update();
-        emit sessionChanged();
+    // Leave the old session running, but stop sending it this view's input
+    if (KSession *oldSession = m_session.data()) {
+        disconnect(this, nullptr, oldSession, nullptr);
+        oldSession->detachView(this);
     }
+
+    m_session = session;
+
+    if (session) {
+        connect(this, SIGNAL(copyAvailable(bool)),
+                session, SLOT(selectionChanged(bool)));
+        connect(this, SIGNAL(termGetFocus()),
+                session, SIGNAL(termGetFocus()));
+        connect(this, SIGNAL(termLostFocus()),
+                session, SIGNAL(termLostFocus()));
+        connect(this, SIGNAL(keyPressedSignal(QKeyEvent *, bool)),
+                session, SIGNAL(termKeyPressed(QKeyEvent *, bool)));
+
+        session->addView(this);
+
+        setRandomSeed(session->getRandomSeed());
+    } else {
+        setScreenWindow(nullptr);
+    }
+
+    update();
+    emit sessionChanged();
 }
 
 
@@ -3856,9 +3886,11 @@ QString TerminalDisplay::colorScheme() const
 void TerminalDisplay::simulateKeyPress(int key, int modifiers, bool pressed, quint32 nativeScanCode, const QString &text)
 {
     Q_UNUSED(nativeScanCode);
-    QEvent::Type type = pressed ? QEvent::KeyPress : QEvent::KeyRelease;
-    QKeyEvent event = QKeyEvent(type, key, (Qt::KeyboardModifier) modifiers, text);
-    keyPressedSignal(&event, false);
+    // The emulation types whatever it is handed, so a release would repeat the key
+    if (!pressed)
+        return;
+    QKeyEvent event(QEvent::KeyPress, key, Qt::KeyboardModifiers(modifiers), text);
+    emit keyPressedSignal(&event, false);
 }
 
 void TerminalDisplay::simulateKeySequence(const QKeySequence &keySequence)
@@ -3866,8 +3898,8 @@ void TerminalDisplay::simulateKeySequence(const QKeySequence &keySequence)
     for (int i = 0; i < keySequence.count(); ++i) {
         const Qt::Key key = keySequence[i].key();
         const Qt::KeyboardModifiers modifiers = keySequence[i].keyboardModifiers();
-        QKeyEvent eventPress = QKeyEvent(QEvent::KeyPress, key, modifiers, "");
-        keyPressedSignal(&eventPress, false);
+        QKeyEvent eventPress(QEvent::KeyPress, key, modifiers, QString());
+        emit keyPressedSignal(&eventPress, false);
     }
 }
 
@@ -3969,10 +4001,18 @@ ScrollBar::ScrollBar(QObject* parent) : QObject(parent) {}
 
 void ScrollBar::setRange(int min, int max)
 {
+    if (min == m_minimum && max == m_maximum)
+        return;
+
     m_minimum = min;
     m_maximum = max;
-    if (m_value < m_minimum) m_value = m_minimum;
-    if (m_value > m_maximum) m_value = m_maximum;
+    emit rangeChanged();
+
+    const int clamped = qBound(m_minimum, m_value, qMax(m_minimum, m_maximum));
+    if (clamped != m_value) {
+        m_value = clamped;
+        emit valueChanged(m_value);
+    }
 }
 
 void ScrollBar::setSingleStep(int step)

@@ -116,6 +116,11 @@ void KSession::removeView(Konsole::TerminalDisplay *display)
     m_session->removeView(display);
 }
 
+void KSession::detachView(Konsole::TerminalDisplay *display)
+{
+    m_session->detachView(display);
+}
+
 void KSession::sessionFinished()
 {
     emit finished();

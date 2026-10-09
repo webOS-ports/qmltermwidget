@@ -116,6 +116,13 @@ public:
     void removeView(TerminalDisplay * widget);
 
     /**
+     * Disconnects a view from this session like removeView(), but leaves
+     * the session running even when it was the last view, so a view can
+     * move to another session.
+     */
+    void detachView(TerminalDisplay * widget);
+
+    /**
      * Returns the views connected to this session
      */
     QList<TerminalDisplay *> views() const;
@@ -518,6 +525,10 @@ private slots:
 //  void zmodemFinished();
 
 private:
+    // Drops every connection between @p view and this session. Takes a
+    // QObject so it also serves a view that is already being destroyed.
+    void forgetView(QObject * view);
+
 
     void updateTerminalSize();
     bool updateForegroundProcessInfo();

@@ -209,18 +209,23 @@ void Session::addView(TerminalDisplay * widget)
 
 void Session::viewDestroyed(QObject * view)
 {
-    TerminalDisplay * display = (TerminalDisplay *)view;
+    // By the time destroyed() is emitted the TerminalDisplay part of the
+    // object is gone, so it is only ever handled as a QObject here.
+    forgetView(view);
 
-    Q_ASSERT( _views.contains(display) );
-
-    removeView(display);
+    // close the session automatically when the last view is removed
+    if ( _views.isEmpty() ) {
+        close();
+    }
 }
 
-void Session::removeView(TerminalDisplay * widget)
+void Session::forgetView(QObject * view)
 {
-    _views.removeAll(widget);
+    _views.removeIf([view](const TerminalDisplay * display) {
+        return static_cast<const QObject *>(display) == view;
+    });
 
-    disconnect(widget,nullptr,this,nullptr);
+    disconnect(view,nullptr,this,nullptr);
 
     if ( _emulation != nullptr ) {
         // disconnect
@@ -229,14 +234,24 @@ void Session::removeView(TerminalDisplay * widget)
         //  - string sending signals from widget
         //
         //  ... and any other signals connected in addView()
-        disconnect( widget, nullptr, _emulation, nullptr);
+        disconnect( view, nullptr, _emulation, nullptr);
 
         // disconnect state change signals emitted by emulation
-        disconnect( _emulation , nullptr , widget , nullptr);
+        disconnect( _emulation , nullptr , view , nullptr);
     }
+}
+
+void Session::detachView(TerminalDisplay * widget)
+{
+    forgetView(widget);
+}
+
+void Session::removeView(TerminalDisplay * widget)
+{
+    forgetView(widget);
 
     // close the session automatically when the last view is removed
-    if ( _views.count() == 0 ) {
+    if ( _views.isEmpty() ) {
         close();
     }
 }
