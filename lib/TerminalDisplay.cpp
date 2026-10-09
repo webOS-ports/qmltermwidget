@@ -2744,13 +2744,13 @@ void TerminalDisplay::mouseReleaseEvent(QMouseEvent* ev)
 
 void TerminalDisplay::getCharacterPosition(const QPointF& widgetPoint,int& line,int& column) const
 {
-    line = (widgetPoint.y()-contentsRect().top()-_topMargin) / _fontHeight;
-    if (line < 0)
-        line = 0;
-    if (line >= _usedLines)
-        line = _usedLines - 1;
+    // Clamped while still floating point: QML can pass any coordinate, and
+    // converting one beyond the range of int is undefined
+    const qreal y = (widgetPoint.y()-contentsRect().top()-_topMargin) / _fontHeight;
+    line = static_cast<int>(qBound<qreal>(0, y, qMax(_usedLines - 1, 0)));
 
-    int x = widgetPoint.x() + _fontWidth / 2 - contentsRect().left() - _leftMargin;
+    const qreal xPos = widgetPoint.x() + _fontWidth / 2 - contentsRect().left() - _leftMargin;
+    int x = static_cast<int>(qBound<qreal>(-1, xPos, static_cast<qreal>(_usedColumns + 1) * _fontWidth));
     if ( _fixedFont )
         column = x / _fontWidth;
     else
