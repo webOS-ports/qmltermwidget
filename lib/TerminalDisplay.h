@@ -527,6 +527,8 @@ public slots:
 
     /** Copies the selected text to the clipboard. */
     void copyClipboard();
+    /** Selects all the text, the history included. */
+    void selectAll();
     /**
      * Pastes the content of the clipboard into the
      * display.
@@ -894,6 +896,8 @@ private:
     bool    _preserveLineBreaks;
     // Whether line wraps onto the next one, false for lines not fetched yet
     bool lineWrapped(int line) const;
+    // What copyAvailable() last said
+    bool    _copyAvailable = false;
     bool    _columnSelectionMode;
 
     QClipboard*  _clipboard;

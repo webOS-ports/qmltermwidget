@@ -448,6 +448,8 @@ public:
 
     /** Clears the current selection */
     void clearSelection();
+    /** Returns true if part of the screen is selected */
+    bool isSelectionValid() const;
 
     /**
       *  Returns true if the character at (@p column, @p line) is part of the
@@ -623,7 +625,6 @@ private:
     void updateEffectiveRendition();
     void reverseRendition(Character& p) const;
 
-    bool isSelectionValid() const;
     // copies text from 'startIndex' to 'endIndex' to a stream
     // startIndex and endIndex are positions generated using the loc(x,y) macro
     void writeToStream(TerminalCharacterDecoder* decoder, int startIndex,

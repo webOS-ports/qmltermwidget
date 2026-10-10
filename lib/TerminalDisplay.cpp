@@ -158,6 +158,8 @@ void TerminalDisplay::setScreenWindow(ScreenWindow* window)
         connect(_screenWindow, &ScreenWindow::outputChanged, this, &TerminalDisplay::updateLineProperties);
         connect(_screenWindow, &ScreenWindow::outputChanged, this, &TerminalDisplay::updateImage);
         connect(_screenWindow, &ScreenWindow::scrollToEnd, this, &TerminalDisplay::scrollToEnd);
+        // Without it copyAvailable was never emitted
+        connect(_screenWindow, &ScreenWindow::selectionChanged, this, &TerminalDisplay::selectionChanged);
         window->setWindowLines(_lines);
     }
 }
@@ -1374,6 +1376,12 @@ void TerminalDisplay::updateImage()
   delete[] dirtyMask;
   delete[] disstrU;
 
+  // The screen drops the selection itself when output or a resize reaches
+  // it, without a word to the window, so a copy offered would copy nothing
+  if (_copyAvailable && !_screenWindow->hasSelection()) {
+      _copyAvailable = false;
+      emit copyAvailable(false);
+  }
 }
 
 void TerminalDisplay::showResizeNotification()
@@ -3222,6 +3230,15 @@ void TerminalDisplay::copyClipboard()
     QApplication::clipboard()->setText(text);
 }
 
+void TerminalDisplay::selectAll()
+{
+  if ( !_screenWindow )
+      return;
+
+  _screenWindow->selectAll();
+  setSelection( _screenWindow->selectedText(_preserveLineBreaks) );
+}
+
 void TerminalDisplay::pasteClipboard()
 {
   emitSelection(false,false);
@@ -3465,8 +3482,12 @@ void TerminalDisplay::bell(const QString& message)
 
 void TerminalDisplay::selectionChanged()
 {
-    if (_screenWindow)
-        emit copyAvailable(_screenWindow->selectedText(false).isEmpty() == false);
+    if (_screenWindow) {
+        // A selection of blanks (a press-and-hold on an empty line) has
+        // nothing worth copying
+        _copyAvailable = !_screenWindow->selectedText(false).trimmed().isEmpty();
+        emit copyAvailable(_copyAvailable);
+    }
 }
 
 void TerminalDisplay::swapColorTable()

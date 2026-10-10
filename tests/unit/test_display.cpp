@@ -292,6 +292,96 @@ TEST(Display, answersEveryInputMethodQuery)
     setSession(display, nullptr);
 }
 
+// Select all reaches the lines scrolled into the history, not only those on
+// the screen, and an empty display (no screen window yet) ignores it. The
+// display announces whether there is anything to copy, which it never did:
+// nothing connected it to the screen window's selection.
+TEST(Display, selectAllIncludesTheHistory)
+{
+    TerminalDisplay unattached;
+    unattached.selectAll();
+
+    Vt102Emulation emulation;
+    emulation.setHistory(HistoryTypeBuffer(100));
+    ScreenWindow *window = emulation.createWindow();
+    window->setWindowLines(4);
+    emulation.setImageSize(4, 20);
+
+    TerminalDisplay display;
+    resize(display, 200, 100);
+    display.setScreenWindow(window);
+
+    QByteArray text;
+    for (int i = 0; i < 10; ++i)
+        text += "line" + QByteArray::number(i) + "\r\n";
+    emulation.receiveData(text.constData(), text.size());
+    display.updateImage();
+
+    bool copyAvailable = false;
+    QObject::connect(&display, &TerminalDisplay::copyAvailable, &display,
+                     [&copyAvailable](bool available) { copyAvailable = available; });
+    display.selectAll();
+
+    const QString selected = window->selectedText(false);
+    CHECK_CONTAINS(selected, QStringLiteral("line0"));
+    CHECK_CONTAINS(selected, QStringLiteral("line9"));
+    CHECK(copyAvailable);
+
+    window->clearSelection();
+    CHECK(!copyAvailable);
+}
+
+// The screen clears the selection on its own when it is resized (and when
+// output reaches it); the display still said there was something to copy
+TEST(Display, copyAvailableFollowsAClearedSelection)
+{
+    Vt102Emulation emulation;
+    emulation.setHistory(HistoryTypeBuffer(100));
+    ScreenWindow *window = emulation.createWindow();
+    window->setWindowLines(4);
+    emulation.setImageSize(4, 20);
+
+    TerminalDisplay display;
+    resize(display, 200, 100);
+    display.setScreenWindow(window);
+
+    const QByteArray text("hello\r\n");
+    emulation.receiveData(text.constData(), text.size());
+    display.updateImage();
+
+    bool copyAvailable = false;
+    QObject::connect(&display, &TerminalDisplay::copyAvailable, &display,
+                     [&copyAvailable](bool available) { copyAvailable = available; });
+    display.selectAll();
+    CHECK(copyAvailable);
+
+    emulation.setImageSize(5, 30);
+    display.updateImage();
+    CHECK(!window->hasSelection());
+    CHECK(!copyAvailable);
+}
+
+// Selecting a word in blank space selects blanks, which are nothing to copy
+TEST(Display, blanksAreNothingToCopy)
+{
+    Vt102Emulation emulation;
+    ScreenWindow *window = emulation.createWindow();
+    window->setWindowLines(4);
+    emulation.setImageSize(4, 20);
+
+    TerminalDisplay display;
+    resize(display, 200, 100);
+    display.setScreenWindow(window);
+    display.updateImage();
+
+    bool copyAvailable = true;
+    QObject::connect(&display, &TerminalDisplay::copyAvailable, &display,
+                     [&copyAvailable](bool available) { copyAvailable = available; });
+    display.simulateMouseDoubleClick(100, 50, Qt::LeftButton, Qt::LeftButton, Qt::ShiftModifier);
+    CHECK(window->hasSelection());
+    CHECK(!copyAvailable);
+}
+
 // Selecting a word asks each line whether it wraps onto the next. The display
 // fetches that only on output, so on a screen with none yet (or after a
 // resize added lines) it read past the end of the list.

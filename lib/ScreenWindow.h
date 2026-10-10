@@ -141,6 +141,13 @@ public:
      * Clears the current selection
      */
     void clearSelection();
+    /**
+     * Selects everything the screen holds, the history included, wherever
+     * the window is scrolled to.
+     */
+    void selectAll();
+    /** Returns true if part of the screen is selected. */
+    bool hasSelection() const;
 
     /** Sets the number of lines in the window */
     void setWindowLines(int lines);

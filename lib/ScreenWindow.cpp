@@ -159,6 +159,22 @@ void ScreenWindow::clearSelection()
     emit selectionChanged();
 }
 
+bool ScreenWindow::hasSelection() const
+{
+    return _screen->isSelectionValid();
+}
+
+void ScreenWindow::selectAll()
+{
+    // In the screen's lines, not the window's, which setSelectionStart() and
+    // setSelectionEnd() clamp to the part of the screen the window shows
+    _screen->setSelectionStart( 0 , 0 , false );
+    _screen->setSelectionEnd( _screen->getColumns() - 1 , lineCount() - 1 );
+
+    _bufferNeedsUpdate = true;
+    emit selectionChanged();
+}
+
 void ScreenWindow::setWindowLines(int lines)
 {
     Q_ASSERT(lines > 0);
