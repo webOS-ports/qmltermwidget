@@ -2567,7 +2567,7 @@ void TerminalDisplay::extendSelection( const QPoint& position )
     i = loc(left.x(),left.y());
     if (i>=0 && i<=_imageSize) {
       selClass = charClass(_image[i]);
-      while ( ((left.x()>0) || (left.y()>0 && (_lineProperties[left.y()-1] & LINE_WRAPPED) ))
+      while ( ((left.x()>0) || (left.y()>0 && lineWrapped(left.y()-1) ))
                       && charClass(_image[i-1]) == selClass )
       { i--; if (left.x()>0) left.rx()--; else {left.rx()=_usedColumns-1; left.ry()--;} }
     }
@@ -2577,7 +2577,7 @@ void TerminalDisplay::extendSelection( const QPoint& position )
     i = loc(right.x(),right.y());
     if (i>=0 && i<=_imageSize) {
       selClass = charClass(_image[i]);
-      while( ((right.x()<_usedColumns-1) || (right.y()<_usedLines-1 && (_lineProperties[right.y()] & LINE_WRAPPED) ))
+      while( ((right.x()<_usedColumns-1) || (right.y()<_usedLines-1 && lineWrapped(right.y()) ))
                       && charClass(_image[i+1]) == selClass )
       { i++; if (right.x()<_usedColumns-1) right.rx()++; else {right.rx()=0; right.ry()++; } }
     }
@@ -2602,9 +2602,9 @@ void TerminalDisplay::extendSelection( const QPoint& position )
     QPoint above = above_not_below ? here : _iPntSelCorr;
     QPoint below = above_not_below ? _iPntSelCorr : here;
 
-    while (above.y()>0 && (_lineProperties[above.y()-1] & LINE_WRAPPED) )
+    while (above.y()>0 && lineWrapped(above.y()-1) )
       above.ry()--;
-    while (below.y()<_usedLines-1 && (_lineProperties[below.y()] & LINE_WRAPPED) )
+    while (below.y()<_usedLines-1 && lineWrapped(below.y()) )
       below.ry()++;
 
     above.setX(0);
@@ -2652,7 +2652,7 @@ void TerminalDisplay::extendSelection( const QPoint& position )
        /* if (selClass == ' ')
         {
           while ( right.x() < _usedColumns-1 && charClass(_image[i+1]) == selClass && (right.y()<_usedLines-1) &&
-                          !(_lineProperties[right.y()] & LINE_WRAPPED))
+                          !lineWrapped(right.y()))
           { i++; right.rx()++; }
           if (right.x() < _usedColumns-1)
             right = left_not_right ? _iPntSelCorr : here;
@@ -2794,6 +2794,14 @@ void TerminalDisplay::updateFilters()
     processFilters();
 }
 
+bool TerminalDisplay::lineWrapped(int line) const
+{
+    // The line properties are only fetched again on output, so after a
+    // resize that added lines they are shorter than the screen
+    return line >= 0 && line < _lineProperties.size()
+           && (_lineProperties[line] & LINE_WRAPPED);
+}
+
 void TerminalDisplay::updateLineProperties()
 {
     if ( !_screenWindow )
@@ -2840,7 +2848,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
   {
      // find the start of the word
      int x = bgnSel.x();
-     while ( ((x>0) || (bgnSel.y()>0 && (_lineProperties[bgnSel.y()-1] & LINE_WRAPPED) ))
+     while ( ((x>0) || (bgnSel.y()>0 && lineWrapped(bgnSel.y()-1) ))
                      && charClass(_image[i-1]) == selClass )
      {
        i--;
@@ -2859,7 +2867,7 @@ void TerminalDisplay::mouseDoubleClickEvent(QMouseEvent* ev)
      // find the end of the word
      i = loc( endSel.x(), endSel.y() );
      x = endSel.x();
-     while( ((x<_usedColumns-1) || (endSel.y()<_usedLines-1 && (_lineProperties[endSel.y()] & LINE_WRAPPED) ))
+     while( ((x<_usedColumns-1) || (endSel.y()<_usedLines-1 && lineWrapped(endSel.y()) ))
                      && charClass(_image[i+1]) == selClass )
      {
          i++;
@@ -2966,7 +2974,7 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
   _actSel = 2; // within selection
   emit isBusySelecting(true); // Keep it steady...
 
-  while (_iPntSel.y()>0 && (_lineProperties[_iPntSel.y()-1] & LINE_WRAPPED) )
+  while (_iPntSel.y()>0 && lineWrapped(_iPntSel.y()-1) )
     _iPntSel.ry()--;
 
   if (_tripleClickMode == SelectForwardsFromCursor) {
@@ -2976,7 +2984,7 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
     int x = _iPntSel.x();
 
     while ( ((x>0) ||
-             (_iPntSel.y()>0 && (_lineProperties[_iPntSel.y()-1] & LINE_WRAPPED) )
+             (_iPntSel.y()>0 && lineWrapped(_iPntSel.y()-1) )
             )
             && charClass(_image[i-1]) == selClass )
     {
@@ -2998,7 +3006,7 @@ void TerminalDisplay::mouseTripleClickEvent(QMouseEvent* ev)
     _tripleSelBegin = QPoint( 0, _iPntSel.y() );
   }
 
-  while (_iPntSel.y()<_lines-1 && (_lineProperties[_iPntSel.y()] & LINE_WRAPPED) )
+  while (_iPntSel.y()<_lines-1 && lineWrapped(_iPntSel.y()) )
     _iPntSel.ry()++;
 
   _screenWindow->setSelectionEnd( _columns - 1 , _iPntSel.y() );

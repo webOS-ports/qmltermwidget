@@ -291,3 +291,24 @@ TEST(Display, answersEveryInputMethodQuery)
 
     setSession(display, nullptr);
 }
+
+// Selecting a word asks each line whether it wraps onto the next. The display
+// fetches that only on output, so on a screen with none yet (or after a
+// resize added lines) it read past the end of the list.
+TEST(Display, selectingBeyondTheFetchedLinesStaysInBounds)
+{
+    Vt102Emulation emulation;
+    ScreenWindow *window = emulation.createWindow();
+    window->setWindowLines(4);
+    emulation.setImageSize(4, 20);
+
+    TerminalDisplay display;
+    resize(display, 200, 100);
+    display.setScreenWindow(window);
+    display.updateImage();
+
+    display.simulateMouseDoubleClick(100, 50, Qt::LeftButton, Qt::LeftButton, Qt::ShiftModifier);
+    display.simulateMouseMove(150, 80, Qt::NoButton, Qt::LeftButton, Qt::ShiftModifier);
+    display.simulateMouseRelease(150, 80, Qt::LeftButton, Qt::NoButton, Qt::ShiftModifier);
+    CHECK_EQ(window->selectedText(false).trimmed(), QString());
+}

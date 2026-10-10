@@ -892,6 +892,8 @@ private:
     bool    _wordSelectionMode;
     bool    _lineSelectionMode;
     bool    _preserveLineBreaks;
+    // Whether line wraps onto the next one, false for lines not fetched yet
+    bool lineWrapped(int line) const;
     bool    _columnSelectionMode;
 
     QClipboard*  _clipboard;
