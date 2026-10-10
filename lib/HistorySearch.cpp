@@ -41,12 +41,17 @@ HistorySearch::~HistorySearch() {
 void HistorySearch::search() {
     bool found = false;
 
-    if (! m_regExp.pattern().isEmpty())
+    if (! m_regExp.pattern().isEmpty() && m_emulation && m_emulation->lineCount() > 0)
     {
+        // The start comes from QML unchecked; lineCount() is one past the end
+        const int lastLine = m_emulation->lineCount() - 1;
+        const int startLine = qBound(0, m_startLine, lastLine);
+        const int startColumn = qMax(0, m_startColumn);
+
         if (m_forwards) {
-            found = search(m_startColumn, m_startLine, -1, m_emulation->lineCount()) || search(0, 0, m_startColumn, m_startLine);
+            found = search(startColumn, startLine, -1, lastLine) || search(0, 0, startColumn, startLine);
         } else {
-            found = search(0, 0, m_startColumn, m_startLine) || search(m_startColumn, m_startLine, -1, m_emulation->lineCount());
+            found = search(0, 0, startColumn, startLine) || search(startColumn, startLine, -1, lastLine);
         }
 
         if (found) {
@@ -126,11 +131,11 @@ bool HistorySearch::search(int startColumn, int startLine, int endColumn, int en
             // Translate startPos and endPos to startColum, startLine, endColumn and endLine in history.
             int startLineNumberInString = findLineNumberInString(decoder.linePositions(), matchStart);
             m_foundStartColumn = matchStart - decoder.linePositions().at(startLineNumberInString);
-            m_foundStartLine = startLineNumberInString + startLine + linesRead;
+            m_foundStartLine = startLineNumberInString + blockStartLine;
 
             int endLineNumberInString = findLineNumberInString(decoder.linePositions(), matchEnd);
             m_foundEndColumn = matchEnd - decoder.linePositions().at(endLineNumberInString);
-            m_foundEndLine = endLineNumberInString + startLine + linesRead;
+            m_foundEndLine = endLineNumberInString + blockStartLine;
 
             //qDebug() << "m_foundStartColumn" << m_foundStartColumn
             //        << "m_foundStartLine" << m_foundEndLine

@@ -30,6 +30,8 @@
 #include <QPointer>
 #include <QRegularExpression>
 
+#include <algorithm>
+
 // Konsole
 #include "KeyboardTranslator.h"
 #include "HistorySearch.h"
@@ -45,8 +47,10 @@ KSession::KSession(QObject *parent) :
 KSession::~KSession()
 {
     if (m_session) {
-        m_session->close();
+        // Disconnect first, so finished() is not emitted from inside the
+        // destructor to QML that may already be tearing down
         m_session->disconnect();
+        m_session->close();
         delete m_session;
     }
 }
@@ -77,8 +81,6 @@ Konsole::Session *KSession::createSession(QString name)
     const QString shellProg = envshell.isEmpty() ? QStringLiteral("/bin/bash") : QString::fromUtf8(envshell);
     m_shellProgram = shellProg;
     session->setProgram(shellProg);
-
-    setenv("TERM", "xterm", 1);
 
     //session->setProgram();
 
@@ -116,6 +118,11 @@ void KSession::removeView(Konsole::TerminalDisplay *display)
     m_session->removeView(display);
 }
 
+void KSession::detachView(Konsole::TerminalDisplay *display)
+{
+    m_session->detachView(display);
+}
+
 void KSession::sessionFinished()
 {
     emit finished();
@@ -151,21 +158,20 @@ int KSession::getShellPID()
 
 void KSession::changeDir(const QString &dir)
 {
-    /*
-       this is a very hackish way of trying to determine if the shell is in
-       the foreground before attempting to change the directory.  It may not
-       be portable to anything other than Linux.
-    */
-    QString strCmd;
-    strCmd.setNum(getShellPID());
-    strCmd.prepend("ps -j ");
-    strCmd.append(" | tail -1 | awk '{ print $5 }' | grep -q \\+");
-    int retval = system(strCmd.toStdString().c_str());
+    // Only when the shell itself has the terminal, or the "cd" would be
+    // typed into whatever program runs in it
+    const int shellPid = m_session->processId();
+    if (shellPid <= 0 || m_session->foregroundProcessId() != shellPid)
+        return;
 
-    if (!retval) {
-        QString cmd = "cd " + dir + "\n";
-        sendText(cmd);
-    }
+    // The path is typed into the shell: no control characters (a ^U or a
+    // newline would let it run something else), and quoted for the shell
+    if (std::any_of(dir.cbegin(), dir.cend(), [](QChar c) { return c.unicode() < 0x20 || c.unicode() == 0x7f; }))
+        return;
+
+    QString quoted = dir;
+    quoted.replace(QLatin1Char('\''), QLatin1String("'\\''"));
+    sendText(QLatin1String("cd '") + quoted + QLatin1String("'\n"));
 }
 
 void KSession::setEnvironment(const QStringList &environment)
@@ -249,6 +255,9 @@ void KSession::sendText(QString text)
 
 void KSession::sendKey(int rep, int key, int mod) const
 {
+    Q_UNUSED(rep)
+    Q_UNUSED(key)
+    Q_UNUSED(mod)
     //TODO implement or remove this function.
 //    Qt::KeyboardModifier kbm = Qt::KeyboardModifier(mod);
 

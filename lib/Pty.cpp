@@ -66,7 +66,10 @@ void Pty::setFlowControlEnabled(bool enable)
   if (pty()->masterFd() >= 0)
   {
     struct ::termios ttmode;
-    pty()->tcGetAttr(&ttmode);
+    if (!pty()->tcGetAttr(&ttmode)) {
+      qWarning() << "Unable to get terminal attributes.";
+      return;
+    }
     if (!enable)
       ttmode.c_iflag &= ~(IXOFF | IXON);
     else
@@ -80,7 +83,8 @@ bool Pty::flowControlEnabled() const
     if (pty()->masterFd() >= 0)
     {
         struct ::termios ttmode;
-        pty()->tcGetAttr(&ttmode);
+        if (!pty()->tcGetAttr(&ttmode))
+            return false;
         return ttmode.c_iflag & IXOFF &&
                ttmode.c_iflag & IXON;
     }
@@ -96,7 +100,10 @@ void Pty::setUtf8Mode(bool enable)
   if (pty()->masterFd() >= 0)
   {
     struct ::termios ttmode;
-    pty()->tcGetAttr(&ttmode);
+    if (!pty()->tcGetAttr(&ttmode)) {
+      qWarning() << "Unable to get terminal attributes.";
+      return;
+    }
     if (!enable)
       ttmode.c_iflag &= ~IUTF8;
     else
@@ -114,7 +121,10 @@ void Pty::setErase(char erase)
   if (pty()->masterFd() >= 0)
   {
     struct ::termios ttmode;
-    pty()->tcGetAttr(&ttmode);
+    if (!pty()->tcGetAttr(&ttmode)) {
+      qWarning() << "Unable to get terminal attributes.";
+      return;
+    }
     ttmode.c_cc[VERASE] = erase;
     if (!pty()->tcSetAttr(&ttmode))
       qWarning() << "Unable to set terminal attributes.";
@@ -126,8 +136,8 @@ char Pty::erase() const
     if (pty()->masterFd() >= 0)
     {
         struct ::termios ttyAttributes;
-        pty()->tcGetAttr(&ttyAttributes);
-        return ttyAttributes.c_cc[VERASE];
+        if (pty()->tcGetAttr(&ttyAttributes))
+            return ttyAttributes.c_cc[VERASE];
     }
 
     return _eraseChar;
@@ -135,7 +145,6 @@ char Pty::erase() const
 
 void Pty::addEnvironmentVariables(const QStringList& environment)
 {
-
     bool termEnvVarAdded = false;
     for (const QString &pair : environment)
     {
@@ -149,16 +158,16 @@ void Pty::addEnvironmentVariables(const QStringList& environment)
 
             setEnv(variable,value);
 
-            if (variable == QLatin1String("TERM")) {
+            if (variable == QLatin1String("TERM"))
                 termEnvVarAdded = true;
         }
     }
 
-    // fallback to ensure that $TERM is always set
+    // fallback to ensure that $TERM is always set; this sat inside the loop
+    // before, so it ran for every variable and never for an empty list
     if (!termEnvVarAdded) {
         setEnv(QStringLiteral("TERM"), QStringLiteral("xterm-256color"));
     }
-}
 }
 
 int Pty::start(const QString& program,
@@ -199,23 +208,29 @@ int Pty::start(const QString& program,
   setUseUtmp(addToUtmp);
 
   struct ::termios ttmode;
-  pty()->tcGetAttr(&ttmode);
-  if (!_xonXoff)
-    ttmode.c_iflag &= ~(IXOFF | IXON);
+  if (!pty()->tcGetAttr(&ttmode))
+  {
+    qWarning() << "Unable to get terminal attributes.";
+  }
   else
-    ttmode.c_iflag |= (IXOFF | IXON);
+  {
+    if (!_xonXoff)
+      ttmode.c_iflag &= ~(IXOFF | IXON);
+    else
+      ttmode.c_iflag |= (IXOFF | IXON);
 #ifdef IUTF8 // XXX not a reasonable place to check it.
-  if (!_utf8)
-    ttmode.c_iflag &= ~IUTF8;
-  else
-    ttmode.c_iflag |= IUTF8;
+    if (!_utf8)
+      ttmode.c_iflag &= ~IUTF8;
+    else
+      ttmode.c_iflag |= IUTF8;
 #endif
 
-  if (_eraseChar != 0)
-      ttmode.c_cc[VERASE] = _eraseChar;
+    if (_eraseChar != 0)
+        ttmode.c_cc[VERASE] = _eraseChar;
 
-  if (!pty()->tcSetAttr(&ttmode))
-    qWarning() << "Unable to set terminal attributes.";
+    if (!pty()->tcSetAttr(&ttmode))
+      qWarning() << "Unable to set terminal attributes.";
+  }
 
   pty()->setWinSize(_windowLines, _windowColumns);
 
@@ -230,7 +245,10 @@ int Pty::start(const QString& program,
 void Pty::setEmptyPTYProperties()
 {
     struct ::termios ttmode;
-    pty()->tcGetAttr(&ttmode);
+    if (!pty()->tcGetAttr(&ttmode)) {
+      qWarning() << "Unable to get terminal attributes.";
+      return;
+    }
     if (!_xonXoff)
       ttmode.c_iflag &= ~(IXOFF | IXON);
     else
@@ -251,12 +269,16 @@ void Pty::setEmptyPTYProperties()
 
 void Pty::setWriteable(bool writeable)
 {
+  // On the open slave rather than by name, so the mode read is the one
+  // changed, and a failed fstat() leaves it alone
+  const int fd = pty()->slaveFd();
   struct stat sbuf;
-  stat(pty()->ttyName(), &sbuf);
+  if (fd < 0 || fstat(fd, &sbuf) != 0)
+    return;
   if (writeable)
-    chmod(pty()->ttyName(), sbuf.st_mode | S_IWGRP);
+    fchmod(fd, sbuf.st_mode | S_IWGRP);
   else
-    chmod(pty()->ttyName(), sbuf.st_mode & ~(S_IWGRP|S_IWOTH));
+    fchmod(fd, sbuf.st_mode & ~(S_IWGRP|S_IWOTH));
 }
 
 Pty::Pty(int masterFd, QObject* parent)

@@ -248,11 +248,11 @@ bool KPty::open()
 #elif defined(HAVE_PTSNAME) || defined(TIOCGPTN)
 
 #ifdef HAVE_POSIX_OPENPT
-    d->masterFd = ::posix_openpt(O_RDWR|O_NOCTTY);
+    d->masterFd = ::posix_openpt(O_RDWR|O_NOCTTY|O_CLOEXEC);
 #elif defined(HAVE_GETPT)
     d->masterFd = ::getpt();
 #elif defined(PTM_DEVICE)
-    d->masterFd = ::open(PTM_DEVICE, O_RDWR|O_NOCTTY);
+    d->masterFd = ::open(PTM_DEVICE, O_RDWR|O_NOCTTY|O_CLOEXEC);
 #else
 # error No method to open a PTY master detected.
 #endif
@@ -286,7 +286,7 @@ bool KPty::open()
             ptyName = QByteArrayLiteral("/dev/pty") + *s3 + *s4;
             d->ttyName = QByteArrayLiteral("/dev/tty") + *s3 + *s4;
 
-            d->masterFd = ::open(ptyName.data(), O_RDWR);
+            d->masterFd = ::open(ptyName.data(), O_RDWR|O_CLOEXEC);
             if (d->masterFd >= 0) {
 #ifdef Q_OS_SOLARIS
                 /* Need to check the process group of the pty.
@@ -353,7 +353,7 @@ grantedpt:
     ioctl(d->masterFd, TIOCSPTLCK, &flag);
 #endif
 
-    d->slaveFd = ::open(d->ttyName.data(), O_RDWR | O_NOCTTY);
+    d->slaveFd = ::open(d->ttyName.data(), O_RDWR | O_NOCTTY | O_CLOEXEC);
     if (d->slaveFd < 0) {
         qWarning() << "Can't open slave pseudo teletype";
         ::close(d->masterFd);
@@ -369,6 +369,7 @@ grantedpt:
 
 #endif /* HAVE_OPENPTY */
 
+    // Already opened close-on-exec; kept for platforms that ignore the flag
     fcntl(d->masterFd, F_SETFD, FD_CLOEXEC);
     fcntl(d->slaveFd, F_SETFD, FD_CLOEXEC);
 
@@ -443,7 +444,7 @@ bool KPty::openSlave()
 	return false;
     }
     //d->slaveFd = KDE_open(d->ttyName.data(), O_RDWR | O_NOCTTY);
-    d->slaveFd = ::open(d->ttyName.data(), O_RDWR | O_NOCTTY);
+    d->slaveFd = ::open(d->ttyName.data(), O_RDWR | O_NOCTTY | O_CLOEXEC);
     if (d->slaveFd < 0) {
 	qDebug() << "Can't open slave pseudo teletype";
 	return false;

@@ -68,6 +68,11 @@ KeyboardTranslatorManager::~KeyboardTranslatorManager()
 }
 QString KeyboardTranslatorManager::findTranslatorPath(const QString& name)
 {
+    // The name comes from QML (kbScheme): it names a file in the layout
+    // directory, not a path
+    if (name.contains(QLatin1Char('/')))
+        return QString();
+
     return QString(get_kb_layout_dir() + name + QLatin1String(".keytab"));
     //return KGlobal::dirs()->findResource("data","konsole/"+name+".keytab");
 }
@@ -91,7 +96,7 @@ void KeyboardTranslatorManager::findTranslators()
     {
         QString translatorPath = listIter.next();
 
-        QString name = QFileInfo(translatorPath).baseName();
+        QString name = QFileInfo(translatorPath).completeBaseName();
 
         if ( !_translators.contains(name) )
             _translators.insert(name,0);
@@ -155,7 +160,7 @@ KeyboardTranslator* KeyboardTranslatorManager::loadTranslator(const QString& nam
     const QString& path = findTranslatorPath(name);
 
     QFile source(path);
-    if (name.isEmpty() || !source.open(QIODevice::ReadOnly | QIODevice::Text))
+    if (name.isEmpty() || path.isEmpty() || !source.open(QIODevice::ReadOnly | QIODevice::Text))
         return nullptr;
 
     return loadTranslator(&source,name);
@@ -168,10 +173,19 @@ const KeyboardTranslator* KeyboardTranslatorManager::defaultTranslator()
     const KeyboardTranslator* translator = findTranslator(QLatin1String("default"));
     if (!translator)
     {
-        QBuffer textBuffer;
-        textBuffer.setData(defaultTranslatorText);
-        textBuffer.open(QIODevice::ReadOnly);
-        translator = loadTranslator(&textBuffer,QLatin1String("fallback"));
+        // Built once and kept with the others; it was built (and leaked)
+        // on every call before
+        const QString fallbackName = QLatin1String("fallback");
+        KeyboardTranslator* fallback = _translators.value(fallbackName);
+        if (!fallback)
+        {
+            QBuffer textBuffer;
+            textBuffer.setData(defaultTranslatorText);
+            textBuffer.open(QIODevice::ReadOnly);
+            fallback = loadTranslator(&textBuffer,fallbackName);
+            _translators.insert(fallbackName, fallback);
+        }
+        translator = fallback;
     }
     return translator;
 }
@@ -722,9 +736,9 @@ QByteArray KeyboardTranslator::Entry::unescape(const QByteArray& input) const
                     // with the corresponding character value
                     char hexDigits[3] = {0};
 
-                    if ( (i < result.size()-2) && isxdigit(result[i+2]) )
+                    if ( (i < result.size()-2) && isxdigit(static_cast<unsigned char>(result[i+2])) )
                             hexDigits[0] = result[i+2];
-                    if ( (i < result.size()-3) && isxdigit(result[i+3]) )
+                    if ( (i < result.size()-3) && isxdigit(static_cast<unsigned char>(result[i+3])) )
                             hexDigits[1] = result[i+3];
 
                     unsigned charValue = 0;

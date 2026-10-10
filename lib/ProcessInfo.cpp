@@ -443,12 +443,9 @@ private:
             } while (!statusLine.isNull() && uidLine.isNull());
 
             uidStrings << uidLine.split('\t', Qt::SkipEmptyParts);
-            // Must be 5 entries: 'Uid: %d %d %d %d' and
-            // uid string must be less than 5 chars (uint)
+            // Must be 5 entries: 'Uid: %d %d %d %d'
             if (uidStrings.size() == 5)
                 uidString = uidStrings[1];
-            if (uidString.size() > 5)
-                uidString.clear();
 
             bool ok = false;
             const int uid = uidString.toInt(&ok);
@@ -473,34 +470,24 @@ private:
             QTextStream stream(&processInfo);
             const QString& data = stream.readAll();
 
-            int stack = 0;
-            int field = 0;
-            int pos = 0;
+            // The name is whatever the process called itself, brackets and
+            // spaces included, so it runs from the first '(' to the last
+            // ')'. Counting brackets let a name like "a) b c" shift the
+            // fields after it.
+            const int nameStart = data.indexOf(QLatin1Char('('));
+            const int nameEnd = data.lastIndexOf(QLatin1Char(')'));
+            if (nameStart < 0 || nameEnd < nameStart) {
+                return false;
+            }
 
-            while (pos < data.count()) {
-                QChar c = data[pos];
+            processNameString = data.mid(nameStart + 1, nameEnd - nameStart - 1);
 
-                if (c == '(') {
-                    stack++;
-                } else if (c == ')') {
-                    stack--;
-                } else if (stack == 0 && c == ' ') {
-                    field++;
-                } else {
-                    switch (field) {
-                    case PARENT_PID_FIELD:
-                        parentPidString.append(c);
-                        break;
-                    case PROCESS_NAME_FIELD:
-                        processNameString.append(c);
-                        break;
-                    case GROUP_PROCESS_FIELD:
-                        foregroundPidString.append(c);
-                        break;
-                    }
-                }
-
-                pos++;
+            // the fields after the name start with the third one
+            const QStringList fields = data.mid(nameEnd + 1).split(QLatin1Char(' '), Qt::SkipEmptyParts);
+            const int firstField = PROCESS_NAME_FIELD + 1;
+            if (fields.size() > GROUP_PROCESS_FIELD - firstField) {
+                parentPidString = fields.at(PARENT_PID_FIELD - firstField);
+                foregroundPidString = fields.at(GROUP_PROCESS_FIELD - firstField);
             }
         } else {
             setFileError(processInfo.error());

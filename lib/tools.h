@@ -6,6 +6,7 @@
 #include <QLoggingCategory>
 
 QString get_kb_layout_dir();
+void set_kb_layout_dir(const QString& dir);
 void add_custom_color_scheme_dir(const QString& custom_dir);
 const QStringList get_color_schemes_dirs();
 

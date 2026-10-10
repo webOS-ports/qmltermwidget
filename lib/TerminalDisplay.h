@@ -149,8 +149,6 @@ public:
         /** Show the scroll bar on the right side of the display. */
         ScrollBarRight=2 
     };
-    /** 
-
     /** Sets the background image of the terminal display. */
     void setBackgroundImage(const QString& backgroundImage);
 
@@ -238,11 +236,11 @@ public:
     /** See setTripleClickSelectionMode() */
     TripleClickMode tripleClickMode() { return _tripleClickMode; }
 
-    void setLineSpacing(uint);
+    void setLineSpacing(int);
     void setMargin(int);
 
     int margin() const;
-    uint lineSpacing() const;
+    int lineSpacing() const;
 
     void emitSelection(bool useXselection,bool appendReturn);
 
@@ -529,6 +527,8 @@ public slots:
 
     /** Copies the selected text to the clipboard. */
     void copyClipboard();
+    /** Selects all the text, the history included. */
+    void selectAll();
     /**
      * Pastes the content of the clipboard into the
      * display.
@@ -709,9 +709,9 @@ protected:
     enum DragState { diNone, diPending, diDragging };
 
     struct _dragInfo {
-      DragState       state;
+      DragState       state = diNone;
       QPoint          start;
-      QDrag           *dragObject;
+      QDrag           *dragObject = nullptr;
     } dragInfo;
 
     // classifies the 'ch' into one of three categories
@@ -731,10 +731,9 @@ protected:
     QVariant inputMethodQuery( Qt::InputMethodQuery query ) const override;
 
     // QMLTermWidget
-    void paint(QPainter * painter);
+    void paint(QPainter * painter) override;
     virtual void geometryChange(const QRectF & newGeometry, const QRectF & oldGeometry) override;
-    void inputMethodQuery(QInputMethodQueryEvent *event);
-    void itemChange(ItemChange change, const ItemChangeData & value);
+    void itemChange(ItemChange change, const ItemChangeData & value) override;
 
 protected slots:
 
@@ -895,6 +894,10 @@ private:
     bool    _wordSelectionMode;
     bool    _lineSelectionMode;
     bool    _preserveLineBreaks;
+    // Whether line wraps onto the next one, false for lines not fetched yet
+    bool lineWrapped(int line) const;
+    // What copyAvailable() last said
+    bool    _copyAvailable = false;
     bool    _columnSelectionMode;
 
     QClipboard*  _clipboard;
@@ -978,7 +981,7 @@ private:
     QFont m_font;
     QPalette m_palette;
     QPalette::ColorRole m_color_role;
-    KSession *m_session;
+    QPointer<KSession> m_session;
     bool m_full_cursor_height;
 
     QFont font() const { return m_font; }
@@ -1070,6 +1073,7 @@ public:
 
 Q_SIGNALS:
     void valueChanged(int value);
+    void rangeChanged();
 
 private:
     int m_minimum{0};

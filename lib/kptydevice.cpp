@@ -164,6 +164,11 @@ bool KPtyDevicePrivate::_k_canWrite()
             write(q->masterFd(),
                   writeBuffer.readPointer(), writeBuffer.readSize()));
     if (wroteBytes < 0) {
+        if (errno == EAGAIN || errno == EWOULDBLOCK) {
+            // the shell is not reading yet; the rest goes when it does
+            writeNotifier->setEnabled(true);
+            return true;
+        }
         q->setErrorString(QLatin1String("Error writing to PTY"));
         return false;
     }
@@ -221,6 +226,9 @@ bool KPtyDevicePrivate::doWait(int msecs, bool reading)
 #endif
         tvp = &tv;
     }
+
+    if (!readNotifier)
+        return false;
 
     while (reading ? readNotifier->isEnabled() : !writeBuffer.isEmpty()) {
         fd_set rfds;
@@ -337,6 +345,8 @@ void KPtyDevice::close()
 
     delete d->readNotifier;
     delete d->writeNotifier;
+    d->readNotifier = nullptr;
+    d->writeNotifier = nullptr;
 
     QIODevice::close();
 
@@ -387,13 +397,14 @@ bool KPtyDevice::waitForBytesWritten(int msecs)
 void KPtyDevice::setSuspended(bool suspended)
 {
     Q_D(KPtyDevice);
-    d->readNotifier->setEnabled(!suspended);
+    if (d->readNotifier)
+        d->readNotifier->setEnabled(!suspended);
 }
 
 bool KPtyDevice::isSuspended() const
 {
     Q_D(const KPtyDevice);
-    return !d->readNotifier->isEnabled();
+    return !d->readNotifier || !d->readNotifier->isEnabled();
 }
 
 // protected
@@ -415,6 +426,9 @@ qint64 KPtyDevice::writeData(const char *data, qint64 len)
 {
     Q_D(KPtyDevice);
     Q_ASSERT(len <= KMAXINT);
+
+    if (!d->writeNotifier)
+        return -1;
 
     d->writeBuffer.write(data, len);
     d->writeNotifier->setEnabled(true);

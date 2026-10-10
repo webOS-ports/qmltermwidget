@@ -159,6 +159,22 @@ void ScreenWindow::clearSelection()
     emit selectionChanged();
 }
 
+bool ScreenWindow::hasSelection() const
+{
+    return _screen->isSelectionValid();
+}
+
+void ScreenWindow::selectAll()
+{
+    // In the screen's lines, not the window's, which setSelectionStart() and
+    // setSelectionEnd() clamp to the part of the screen the window shows
+    _screen->setSelectionStart( 0 , 0 , false );
+    _screen->setSelectionEnd( _screen->getColumns() - 1 , lineCount() - 1 );
+
+    _bufferNeedsUpdate = true;
+    emit selectionChanged();
+}
+
 void ScreenWindow::setWindowLines(int lines)
 {
     Q_ASSERT(lines > 0);
@@ -196,7 +212,9 @@ QPoint ScreenWindow::cursorPosition() const
 
 int ScreenWindow::currentLine() const
 {
-    return qBound(0,_currentLine,lineCount()-windowLines());
+    // The screen can be shorter than the window (a program can shrink it
+    // with CSI 8 t), which left qBound() a maximum below its minimum
+    return qBound(0,_currentLine,qMax(0,lineCount()-windowLines()));
 }
 
 void ScreenWindow::scrollBy( RelativeScrollMode mode , int amount )
